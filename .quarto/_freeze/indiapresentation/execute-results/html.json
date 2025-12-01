@@ -1,0 +1,21 @@
+{
+  "hash": "dd2261c02bc798bf31e0e2825de58984",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Internacionalização na Pós-Graduação: Desafios, Oportunidades e Vivências\"\nsubtitle: \"Mumbai - Índia\"\nauthor: \"Willams Batista Ferreira da Silva\"\nlang: pt-BR  # <--- ADICIONADO: Define o idioma do documento\ndate: \"2025-12-10\" # <--- ALTERADO: Formato ISO para processamento\ninstitute: \"<br> Departamento de Estatística <br> Centro de Ciências Exatas e da Natureza (CCEN) <br> Universidade Federal de Pernambuco (UFPE) <br> <br> \"\n\nformat: \n  revealjs:\n    incremental: true \n    math: true\n    center: true\n    scrollable: true\n    transition: fade\n    theme: serif\n    slide-number: c/t\n    show-slide-number: all\n    date-format: \"DD MMMM YYYY\" # <--- MANTIDO: Agora funcionará com 'lang'\n    citations: true\n    fontsize: 140%\n    # ATUALIZEI E TRADUZI O RODAPÉ PARA O CONTEXTO\n    footer: \"Departamento de Estatística - CCEN/UFPE - Dezembro 2025\" \n    number-depth: 2 \n    mathjax: true\n# bibliography: Thesis.bib\n---\n\n\n## Quarto\n\nQuarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.\n\n\n::: {.cell}\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] 2\n```\n\n\n:::\n:::\n",
+    "supporting": [
+      "indiapresentation_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {
+      "include-after-body": [
+        "\n<script>\n  // htmlwidgets need to know to resize themselves when slides are shown/hidden.\n  // Fire the \"slideenter\" event (handled by htmlwidgets.js) when the current\n  // slide changes (different for each slide format).\n  (function () {\n    // dispatch for htmlwidgets\n    function fireSlideEnter() {\n      const event = window.document.createEvent(\"Event\");\n      event.initEvent(\"slideenter\", true, true);\n      window.document.dispatchEvent(event);\n    }\n\n    function fireSlideChanged(previousSlide, currentSlide) {\n      fireSlideEnter();\n\n      // dispatch for shiny\n      if (window.jQuery) {\n        if (previousSlide) {\n          window.jQuery(previousSlide).trigger(\"hidden\");\n        }\n        if (currentSlide) {\n          window.jQuery(currentSlide).trigger(\"shown\");\n        }\n      }\n    }\n\n    // hookup for slidy\n    if (window.w3c_slidy) {\n      window.w3c_slidy.add_observer(function (slide_num) {\n        // slide_num starts at position 1\n        fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);\n      });\n    }\n\n  })();\n</script>\n\n"
+      ]
+    },
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

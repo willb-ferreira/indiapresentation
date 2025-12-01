@@ -1,0 +1,1228 @@
+---
+title: "Generalized Gamma Spatial ARMA Conditional Model for Speckled Data"
+subtitle: "Theoretical Developments and Applications"
+author: "Willams B. F. da Silva"
+date: "29 April 2025"
+institute: "<br> Center for Exact and Natural Sciences (CCEN) <br> Federal University of Pernambuco (UFPE) <br> <br> Advisor: Prof. Abraão D. C. Nascimento <br> Co-Advisor: Prof. Francisco J. A. Cysneiros"
+advisor: "Abraão"
+co-advisor: "Cysneiros"
+
+format: 
+  revealjs:
+    incremental: true 
+    math: true
+    center: true
+    scrollable: true
+    transition: fade # slide
+    # theme: serif
+    # theme: solarized
+    # theme: night
+    # theme: white
+    # theme: default
+    theme: simple
+    slide-number: c/t
+    show-slide-number: all
+    date-format: "DD MMMM YYYY"
+    citations: true
+    fontsize: 140%
+    footer: "Department of Statistics - CCEN/UFPE - April 2025"
+    # number-sections: true
+    number-depth: 2  # Ativa numeração de seções (opcional)
+    mathjax: true
+bibliography: Thesis.bib
+---
+
+# Overview
+
+-   Generalized Gamma Spatial ARMA Conditional Model for Speckled Data and Applications
+-   Estimation of the equivalent number of looks in correlated SAR image
+-   Summarizing results
+
+
+
+<!-- # Introduction -->
+<!-- -   Sensors: passive and active. -->
+<!-- -   Radio detection and ranging (Radar) -->
+<!-- -   Synthetic Aperture -->
+<!-- -   SAR and PolSAR models -->
+
+
+<!-- ## Summary of SAR Frequency Bands and Their Applications -->
+<!-- ::: {style="max-width: 100%;"} -->
+<!-- | **Band** | **Wavelength** | **Characteristics** | **Applications** | -->
+<!-- |----------|--------------|---------------------|------------------| -->
+<!-- | **X** | ~3 cm | High resolution, low penetration | Surveillance, urban mapping, change detection | -->
+<!-- | **C** | ~5.6 cm | Moderate resolution and penetration | Agriculture monitoring, oceanography, weather radar | -->
+<!-- | **L** | ~23 cm | Good penetration in vegetation and soil | Geoscience, archaeology, forest analysis | -->
+<!-- | **P** | ~70 cm | High penetration, low resolution | Biomass mapping, geology, underground detection | -->
+<!-- ::: -->
+
+<!-- ## Radar Satellite Systems -->
+
+<!-- ::: {.small .stretch} -->
+<!-- | **System** | **Band** | **Polarization Modes** | **Applications** | -->
+<!-- |------------|--------|----------------|------------------| -->
+<!-- | **Sentinel-1 (ESA)** | C | VV, VH (Dual-pol); HH, HV (for specific modes) | Environmental monitoring, land use, maritime surveillance, disaster management | -->
+<!-- | **RADARSAT-2 (Canada)** | C | HH, HV, VH, VV (Full-pol) | Ice monitoring, maritime surveillance, disaster response, agriculture | -->
+<!-- | **TerraSAR-X / TanDEM-X (Germany)** | X | HH, VV, HV, VH (Dual-pol) | High-resolution imaging, digital elevation models (DEM), urban mapping | -->
+<!-- | **ALOS PALSAR-2 (Japan)** | L | HH, HV, VH, VV (Full-pol, Compact-pol) | Forestry, biomass estimation, landslide detection, disaster response | -->
+<!-- | **SAOCOM-1A/1B (Argentina)** | L | HH, HV, VH, VV (Full-pol) | Soil moisture monitoring, precision agriculture, disaster response | -->
+<!-- | **NISAR (NASA-ISRO, upcoming)** | L, S | HH, HV, VH, VV (Full-pol, Compact-pol) | Earth surface deformation, disaster monitoring, environmental studies | -->
+<!-- ::: -->
+
+<!-- # SAR and PolSAR models -->
+
+<!-- ## Backscatter -->
+<!-- ::: {style="max-width: 100%;"} -->
+<!-- The radar equation is written as -->
+<!-- \begin{equation} -->
+<!-- \label{radarequation} -->
+<!--     P_R = \sigma\frac{P_TG_T(\theta,\phi)}{4\pi r^2_T}\frac{A_{ER}(\theta,\phi)}{4\pi r^2_R} -->
+<!-- \end{equation} -->
+<!-- where the important one for us is the radar cross section (RCS), $\sigma$, who determines the effects of the target of interest on the balance of powers established by the radar equation [@Mott1992].  -->
+<!-- ::: -->
+<!-- ::: {.fragment fragment-index=2} -->
+
+<!-- Note that the RCS is the only parameter that interacts with the target. Therefore, the RCS is also known as the electromagnetic signature of the target. The RCS is influenced by many factors as @Frery2022 [p.18] specifies: -->
+
+<!-- -   the composition of the target, -->
+<!-- -   the incident angle of the radar emitted signal, -->
+<!-- -   the polarization of the radar emitted signal, -->
+<!-- -   the size of the target and, mainly, its relative size to the wavelength of the radar -->
+<!-- signal. -->
+<!-- ::: -->
+
+
+<!-- ## Speckle -->
+<!-- ::: {style="max-width: 100%;"} -->
+<!-- The backscatter of the incident wave at the $[n,m]$ position of the image is -->
+
+<!-- \begin{align} -->
+<!-- 	R[n,m] -->
+<!-- 	\,=\, -->
+<!-- 	A[n,m]\,\exp\{\,\sqrt{-1}\,\psi[n,m]\,\} -->
+<!-- 	\,=\, -->
+<!-- 	\sum_{k=1}^{B[n,m]}\,A_{k}[n,m]\, -->
+<!-- 	\exp\{\,\sqrt{-1}\,\,\psi_{k}[n,m]\,\}, -->
+<!-- 	\label{for:scatter} -->
+<!-- \end{align} -->
+<!-- where $A[n,m]$ is the wave amplitude, $\psi[n,m]$ is the wave phase, $B[n,m]$ is the number of scatterings in the resolution cell $[n,m]$, and -->
+<!-- $A_{k}[n,m]$ and $\psi_{k}[n,m]$ are the amplitude and phase, respectively, of the $k$th scattering from cell $[n,m]$.  -->
+<!-- ::: -->
+<!-- ::: {.fragment fragment-index=2} -->
+<!-- According to @Oliver2004 [p.87], if $B[n,m]$ is sufficiently large: -->
+
+<!-- -   $R[n,m]$ follows a complex normal distribution, and the real and imaginary parts of $R[n,m]$ are independently normally distributed random variables,  -->
+<!-- -   $\psi[n,m]$ is uniformly distributed on $[-\pi,\pi]$, and  -->
+<!-- -   $A[n,m]$ follows the Rayleigh distribution.  -->
+<!-- ::: -->
+
+<!-- ## Intensity -->
+<!-- ::: {style="max-width: 100%;"} -->
+
+<!-- A main physical quantity of SAR images is the intensity, say $I[n,m]$, given by (assuming different scatterers are independent) -->
+<!-- $$ -->
+<!-- I[n,m]\,=\, | A[n,m]|^2\,=\,A[n,m]A^*[n,m]\,=\, -->
+<!-- \sum_{k=1}^{B[n,m]}\,A_k^2[n,m], -->
+<!-- %\,\sum_{k_2=1}^{N[n,m]}\,\,A_{k_2}[n,m]\,\exp\{\,\sqrt{-1}\,\,[\psi_{k_1}[n,m]-\psi_{k_2}[n,m]]\,\} -->
+<!-- $$ -->
+<!-- where $\mid\cdot\mid$ and $(\cdot)^*$ are the modulo and complex conjugate operators.  -->
+<!-- ::: -->
+
+<!-- ## Multilooking -->
+<!-- ::: {.small .stretch} -->
+<!-- The process of multilooking is defined as -->
+<!-- \begin{equation} -->
+<!--     I[n,m] = \frac{1}{L}\sum_{k=1}^L I_k[n,m]  -->
+<!-- \end{equation}  -->
+<!-- where $I_k[n,m]$ is the intensity of the $k$th look and $L$ is the number of looks. The multilooking process can be performed in different domains, such as spatial, frequency, acquisition, and temporal domains. The impact of multilooking on resolution and applications is summarized in the table below: -->
+
+<!-- | **Multilooking Type**| **Resolution Impact**  | **Applications** | -->
+<!-- |-------------|------------------|------------------| -->
+<!-- | **Spatial domain**       | Decreases spatial resolution by averaging neighboring pixels | Speckle reduction in georeferenced SAR images, improved visualization | -->
+<!-- | **Frequency domain**     | Preserves more spatial details compared to spatial multilooking | Used in SLC data to improve speckle suppression while maintaining resolution | -->
+<!-- | **Acquisition**          | Reduces resolution before image storage                   | Common in ScanSAR mode and other wide-swath SAR acquisition techniques | -->
+<!-- | **Temporal**            | Maintains spatial resolution while reducing speckle across multiple images | Environmental monitoring, InSAR, time-series SAR analysis | -->
+
+<!-- ::: -->
+
+<!-- ## Multiplicative model -->
+<!-- ::: {style="max-width: 100%;"} -->
+<!-- The derivation of the multiplicative model was a breakthrough in understanding the radar image properties [@Ward1981]. The multiplicative model relates a pixel's intensity (or amplitude) from a single polarization channel of a SAR image with an uncorrelated product of the backscattering signal and the speckle. The relation at the pixel [n,m] is given as -->
+<!-- \begin{equation} -->
+<!--     \label{multiplicativemodel} -->
+<!--     I[n,m] = \sigma[n,m] \times T[n,m], -->
+<!-- \end{equation} -->
+<!-- where $I[n,m]$, $\sigma[n,m]$, and $T[n,m]$ are the intensity, backscattering signal (RCS), and the speckle at the pixel $[n,m]$.  -->
+<!-- ::: -->
+
+<!-- ## SAR distributions -->
+<!-- ::: {style="max-width: 100%;"} -->
+
+<!-- -   Rayleigh,  -->
+<!-- -   Exponential, -->
+<!-- -   $\Gamma$, -->
+<!-- -   $\mathcal{K}$ [@Jakeman1976], -->
+<!-- -   $\mathcal{G}^0$ [@Frery1997], -->
+<!-- -   $\mathcal{G}^H$ distribution [@Frery2010]. -->
+<!-- ::: -->
+
+<!-- ## PolSAR distributions -->
+<!-- :::::{.columns} -->
+<!-- :::: {.column width="100%"} -->
+<!-- The $\mathbf{S}$ matrix, known as backscaterring matrix, is given by -->
+<!-- \begin{equation} -->
+<!--     \mathbf{S} =  -->
+<!--     \begin{bmatrix} -->
+<!--     S_{HH} & S_{HV}\\ -->
+<!--     S_{VH} & S_{VV} -->
+<!--     \end{bmatrix}, -->
+<!-- \end{equation} -->
+<!-- where the subscripts $H$ and $V$ stand for the horizontal and vertical polarization of the wave, respectively. The lexicographic representation of the scattering vector is -->
+<!-- \begin{align} -->
+<!-- \boldsymbol{\omega} &=  -->
+<!-- \begin{bmatrix} -->
+<!-- S_{HH} & \sqrt{2}S_{HV} & S_{VV}     -->
+<!-- \end{bmatrix}^\top.     -->
+<!-- \end{align} -->
+<!-- Multilook PolSAR data are usually represented as the mean of the covariance matrix $\mathbf{C}$ based on the nominal number of looks, $L$, i.e. -->
+<!-- \begin{equation} -->
+<!--     \bar{\mathbf{C}} = \frac{1}{L}\sum_{i=1}^L \mathbf{C}_i = \frac{1}{L}\sum_{i=1}^L \boldsymbol{\omega}_i\boldsymbol{\omega}_i^*. -->
+<!-- \end{equation} -->
+<!-- Suppose that $\boldsymbol{\omega}$ follows a zero mean circular multivariate complex normal distribution. Then, if $L\geq d$, the scattering vectors $\boldsymbol{\omega}_i$ are independent of each other, $L\mathbf{\bar{C}}$ follows a nonsingular complex Wishart distribution [@Goodman1963]. We write $\mathbf{Z} = L\mathbf{\bar{C}}\sim \mathcal{W}_{d}^{\mathcal{C}}(L,\boldsymbol{\Sigma})$. The complex Wishart distribution is commonly used to model fully developed speckle in PolSAR data (homogeneous areas). -->
+<!-- :::: -->
+
+<!-- ::::: -->
+
+<!-- ## Other PolSAR distributions -->
+
+<!-- -   Multivariate $\mathcal{K}$ [@Lee1994] -->
+<!-- -   Multivariate $\mathcal{G}^0$  [@Freitas2004] -->
+<!-- -   CTP$\mathcal{W}_m^{\mathbb{C}}$ and CG$\mathcal{W}_m^{\mathbb{C}}$ [@Ferreira2022] -->
+
+
+# Generalized Gamma Spatial ARMA Conditional Model
+
+## Introduction
+
+-   Markov random fields [@Whittle1954] [@Xie2002] 
+-   Spatial ARMA process [@Bustos2009] [@Cullis1991] [@Martin1990]
+-   Non-gaussian spatial ARMA conditional models [@Palm2022]
+-   Our proposal
+
+:::{.notes}
+A modelagem de imagens usando campos aleatórios de Markov (MRFs) é considerada uma das abordagens mais fidedignas porque os MRFs conseguem capturar de forma natural e eficiente as dependências espaciais locais entre pixels, algo fundamental para representar a estrutura e o contexto presentes em imagens reais.
+:::
+
+
+## Definition 
+::: {style="max-width: 100%;"}
+
+Let \{$Z[n,m]$, for $n =1, 2, \ldots, N$ and $m = 1, 2, \ldots, M$\} be a random variable representing the pixels of an $N\times M$ image, $\mathcal{S}[n,m] = \left\{(k,l) \in \mathbb{Z}^2 : 1\leq k \leq n, 1\leq l \leq m\right\} - \{[n,m]\}$ be a strongly causal region at the pixel $[n,m]$ [@Bustos2009], and $z[n,m]$ be realization of $Z[n,m]$. If we assume that the conditional distribution $\left[Z[{n,m}] \mid \mathcal{S}[n,m]\right]$ follows a reparametrized generalized gamma distribution given in @Silva2023, then its probability density function (pdf) 
+\begin{align}
+\label{2DGGARMA}
+f\left(z[n,m]) \mid \mathcal{S}[n,m]\right) = 
+\frac{\lvert\nu \rvert }{\Gamma(L)}\,&\left[\frac{\Gamma(L+1/\nu)}{\mu[n,m]\,\Gamma(L)}\right]^{L\,\nu}\,z[n,m]^{L\nu-1}\nonumber \exp
+\left\{
+-%\,L^{1-L}\,
+\,\left[\frac{\Gamma(L+1/\nu)z[n,m]}{\mu[n,m]\,\Gamma(L)}\right]^{\nu}
+\right\},
+\end{align}
+and cumulative density function (cdf)
+\begin{align}
+F\left(z[n,m]\mid \mathcal{S}[n,m]\right) = &
+\frac{1}{\Gamma(L)}\,
+\left\{
+\begin{array}{l}
+\gamma\left(L,\left[\frac{\Gamma(L+1/\nu)}{\mu[n,m]\,\Gamma(L)}\,z[n,m]\right]^{\nu}\right),\text{ for }\nu>0,\\
+\Gamma\left(L,\left[\frac{\Gamma(L+1/\nu)}{\mu[n,m]\,\Gamma(L)}\,z[n,m]\right]^{\nu}\right),\text{ for }\nu<0,
+\end{array}
+\right.
+\end{align}
+
+where $\Gamma(a,x) = \int^x_0 \, t^{a-1} \mathrm{e}^{- t} \mathrm{d}t$ is the lower incomplete gamma function and $\Gamma(a, x) = \int^{\infty}_x \, t^{a-1} \mathrm{e}^{- t} \mathrm{d}t$ is the upper incomplete gamma function.
+:::
+
+## Conditional mean and variance
+:::{style="max-width: 100%;"}
+
+The associated conditional mean and variance are given by, respectively,
+\begin{align*}
+	\mathbb{E}(Z[{n,m}]\mid\mathcal{S}[n,m]) = \mu[{n,m}], \text{and } \mathbb{V}\text{ar}(Z[{n,m}]\mid\mathcal{S}[n,m]) = \mu^2[n,m]\varphi,
+\end{align*}
+<!-- and -->
+<!-- \begin{align*} -->
+<!-- 	\mathbb{V}\text{ar}(Z[{n,m}]\mid\mathcal{S}[n,m]) &= \mu^2[n,m]\varphi, -->
+<!-- \end{align*} -->
+for $\nu > -2/L$, where $V(\mu[n,m]):=\mu^2[n,m]$ is a variance function and $$\varphi:=\left[\Gamma(L)\,\Gamma(L+2/\nu)/\Gamma^{2}(L+1/\nu)\,-\,1\right]$$ is a dispersion parameter. Moreover, $\varphi$ is also the squared coefficient of variation (SCV) on the G$\Gamma$ distribution. In which, the dynamical component in the model is given by
+\begin{align*}
+	g\left(\mu[n,m]\right) &=\alpha +\boldsymbol{x}^\top[n,m]\boldsymbol{\gamma} + \sum^{p_1}_{i=0}\sum^{p_2}_{j=0}\phi_{ij}\left\{g(y[n-i,m-j]) - \boldsymbol{x}^\top[n-i,m-j]\boldsymbol{\gamma}\right\}\\
+    &+\sum^{q_1}_{k=0}\sum^{q_2}_{l=0}\theta_{kl}\epsilon[n-k,m-l], 
+\end{align*} 
+where $\phi_{ij}$ are the autoregressive parameters, $\theta_{kl}$ are the moving average parameters, in which $\phi_{00} = \theta_{00} = 0$, $g:(0,\infty)\rightarrow \mathbb{R}$ is the link function strictly monotonic and twice differentiable, $\boldsymbol{\gamma}= \left(\gamma_1,\gamma_2,\ldots,\gamma_r\right)^\top$ is a vector of parameters, $\boldsymbol{x}[n,m] \in \mathbb{R}^k$ is the k-dimensional vector of the covariates at the position $[n,m]$, and $\epsilon[n,m] = g(z[n,m]) - g(\mu[n,m])$ is an error [@Benjamin2003].
+<!-- Moreover, $\varphi$ is the squared coefficient of variation (SCV) on the generalized gamma distribution. -->
+<!-- The coefficient of variation is often used in SAR images for the identification of heterogeneity [@Frery2024], the detection of changes [@ColinKoeniguer2020], or the classification of plants [@Whelen2018], and the estimation of the equivalent number of looks [@ElZaart2002]. -->
+<!-- The generalized gamma model has several important special cases, such as the Weibull, gamma, and Rayleigh distributions, which are closely related to SAR image recognition. \citeonline{Balakrishnan2006} have shown that the limiting $G\Gamma$ distribution when $\nu \rightarrow 0$ is the lognormal distribution, which is identical to $L\rightarrow \infty$. -->
+:::
+
+## Physical interpretation
+:::{style="max-width: 100%;"}
+
+The multiplicative model states that: intensity SAR, say $Z\in \mathbb{R}_+$, is the product of two independent random variables that indicate backscatter, $X\in \mathbb{R}_+$, and speckle noise, $Y\in \mathbb{R}_+$: $Z = X \times Y$.
+The speckle pattern is gamma-distributed with a unit mean. This way, assuming that $Z[n,m]\sim \text{G}\Gamma(\nu,L,\mu[n,m])$, the following relationship is verified:
+\begin{equation}
+\underbrace{Z[n,m]}_{\text{Intensity}}
+\,=\,
+\underbrace{\mu[n,m]}_{\text{Backscatter signal}}\,\times\,
+\underbrace{
+\frac{\Gamma(L)}{\Gamma(L+1/\nu)}\,Y^{1/\nu}[n,m]
+}_{\text{Part of speckle}},
+\label{HH}
+\end{equation}
+where $Y[n,m]\sim \Gamma(L,1)$. Note that one can take $\nu=1$, the equation collapses in the gamma density reparametrized by the mean $\mu[n,m]$.
+:::
+
+<!-- ## Proposition and central moments -->
+<!-- :::{style="max-width: 100%;"} -->
+<!-- We derive the following important result on the moments of $Z[n,m]$. Let $Z[n,m]\sim G\Gamma(L,\nu,\mu[n,m])$, then  -->
+<!--     \begin{equation} -->
+<!--         \mathbb{E}\left[Z^s[n,m]\mid\mathcal{S}[n,m]\right] = \mu^s[n,m]\frac{\Gamma^{s-1}(L)\,\Gamma(L + s/\nu)}{\Gamma^s(L+1/\nu)}, -->
+<!--     \end{equation} -->
+<!--     for $\nu > -s/L$ and $s>0$. -->
+<!-- \noindent -->
+<!-- This proposition determines that the used G$\Gamma$ $s$-th noncentral moment is proportional to $\mu^s[n,m]$. From this result, we can derive the skewness and kurtosis of the $G\Gamma$ distribution. Thus, the skewness and kurtosis of the $G\Gamma$ distribution are given by -->
+<!-- \begin{align} -->
+<!--     \tilde{\mu}_3[n,m] = &\left[\frac{(\varphi + 1)\Gamma(L)\Gamma(L + 3/\nu)}{\Gamma(L + 1/\nu)\Gamma(L + 2/\nu)} - 3\,\varphi - 1 \right]/\varphi^{3/2}  -->
+<!-- \end{align} -->
+<!-- and -->
+<!-- \begin{align} -->
+<!--     \tilde{\mu}_4[n,m] = &\left[\frac{(\varphi + 1)^2\Gamma(L)\Gamma(L + 4/\nu)}{\Gamma^2(L + 2/\nu)}\right. \\  -->
+<!--     &\left.- \frac{4(\varphi + 1)\Gamma(L)\Gamma(L + 3/\nu)}{\Gamma(L + 2/\nu)\Gamma(L + 1/\nu)}   + 6\,\varphi + 3 \right]/\varphi^{2}, \nonumber -->
+<!-- \end{align} -->
+<!-- for $\nu > -4/L$, where $\tilde{\mu}_3[n,m]$ and $\tilde{\mu}_4[n,m]$ are the skewness and kurtosis, respectively. -->
+
+<!-- ::: -->
+
+## Diagram of distributions
+
+:::{style="max-width: 150%;"}
+<!-- Figure~\ref{diagram} shows special cases of $G\Gamma$ and their relationships. -->
+<!-- The distributions we deal with in this chapter are in bold. It is also interesting to note that odd integers for $\nu$ denote distributions that model intensity data, and even integers for $\nu$ denote distributions that describe amplitude data. Figure~\ref{diagram} can also be created for the reciprocal distributions if $\nu<0$ is considered. -->
+
+![](Images/diagram.png){width=150%}
+:::
+
+<!-- ## Spatial model -->
+<!-- :::{style="max-width: 100%;"} -->
+
+<!-- The idea is to use the @Benjamin2003 framework of regression for time series analysis and incorporate the dynamic component from the spatial ARMA of @Bustos2009, and thus, extend the model proposed by @Silva2023. The spatial ARMA model is described by the following equation [@Bustos2009] -->
+<!-- \begin{equation} -->
+<!-- \label{eqmain} -->
+<!--     \Phi(B_1,B_2)\left\{g(z[n,m]) - \boldsymbol{x}^\top[n,m]\boldsymbol{\gamma}\right\} = \alpha +\Theta(B_1,B_2) e[n,m] -->
+<!-- \end{equation} -->
+<!-- where $\Phi(B_1, B_2) = 1 - \sum^{p_1}_{i=0}\sum^{p_2}_{j=0}\phi_{ij}B^i_1B_2^j$, $\Theta(B_1, B_2) = 1 + \sum^{q_1}_{k=0}\sum^{q_2}_{l=0}\theta_{ij}B^i_1B_2^j$, $\phi_{ij}$ are the autoregressive parameters, $\theta_{kl}$ are the moving average parameters, in which $\phi_{00} = \theta_{00} = 0$, $g:(0,\infty)\rightarrow \mathbb{R}$ is the link function strictly monotonic and twice differentiable, $e[n,m]$ is a residual [@Benjamin2003], $\boldsymbol{\gamma}= \left(\gamma_1,\gamma_2,\ldots,\gamma_r\right)^\top$ is a vector of parameters, $\textbf{x}[n,m] \in \mathbb{R}^k$ is the k-dimensional vector of the covariates at the position $[n,m]$, $B_1\{\cdot\}$ and $B_2\{\cdot\}$ are the backshift operators, and $e[n,m] = g(z[n,m]) - g(\mu[n,m])$ is an error [@Benjamin2003].  -->
+
+
+<!-- ::: -->
+
+<!-- ## Linear predictor -->
+<!-- :::{style="max-width: 100%;"} -->
+<!-- Developing the previous equation, one can reach the following equations -->
+<!-- \begin{align*} -->
+<!--     g(\mu[n,m]) = \alpha +\boldsymbol{x}^\top[n,m]\boldsymbol{\gamma} + \sum^{p_1}_{i=0}\sum^{p_2}_{j=0}&\phi_{ij}\left\{g(z[n-i,m-j]) - \boldsymbol{x}^\top[n-i,m-j]\boldsymbol{\gamma}\right\}\\ -->
+<!--     +&\sum^{q_1}_{k=0}\sum^{q_2}_{l=0}\theta_{ij}e[n-i,m-j]. -->
+<!-- \end{align*} -->
+<!-- Also, the spatial predictor $\tau$ at the position $[n,m]$ has the form -->
+<!-- \begin{align*} -->
+<!--     \tau[n,m] = \alpha + \sum^{p_1}_{i=0}\sum^{p_2}_{j=0}&\phi_{ij}\left\{g(z[n-i,m-j]) - \boldsymbol{x}^\top[n-i,m-j]\boldsymbol{\gamma}\right\} \\ &+ \sum^{q_1}_{k=0}\sum^{q_2}_{l=0}\theta_{ij}e[n-i,m-j]. -->
+<!-- \end{align*} -->
+<!-- Therefore, the linear predictor can be written as -->
+<!-- \begin{equation} -->
+<!--     g(\mu[n,m]) = \eta[n,m] = \boldsymbol{x}^\top[n,m]\boldsymbol{\gamma} + \tau[n,m]. -->
+<!-- \end{equation} -->
+<!-- ::: -->
+
+<!-- ## Conditional maximum likelihood -->
+<!-- :::{style="max-width: 100%;"} -->
+<!-- Let $z[1,1],\,z[1,2],\,\ldots,\,z[N,M]$ be the observed data (in our case an image), $\boldsymbol{\delta} = \left(L, \,\nu,\, \alpha, \,\boldsymbol{\gamma}^\top, \,\boldsymbol{\phi}^\top,\,\boldsymbol{\theta}^\top\right)^\top$ be the parameter vector where $\boldsymbol{\gamma} = \left(\gamma_1,\,\gamma_2,\,\ldots,\,\gamma_r\right)^\top$, $\boldsymbol{\phi} = \left(\phi_{01},\,\phi_{02},\,\ldots,\,\phi_{10},\,\ldots,\,\phi_{p_1p_2}\right)^\top$, and $\boldsymbol{\theta} = \left(\theta_{01},\,\theta_{02},\,\ldots,\,\theta_{10},\,\ldots,\,\theta_{q_1q_2}\right)^\top$, where the conditional log-likelihood function is given by -->
+<!-- \begin{equation*} -->
+<!-- 	\begin{aligned} -->
+<!-- 		\ell(\boldsymbol{\delta}) =& \sum_{n=w+1}^N\sum_{m=w+1}^M \log\,f(z[n,m] \mid \mathcal{S}[n,m]) -->
+<!-- 		\\ -->
+<!-- 		=&  \sum_{n=w+1}^N\sum_{m=w+1}^M \log\left[\frac{\lvert\nu\rvert}{\Gamma(L)}\right] + L\nu\log\left[\frac{\Gamma(L + 1/\nu)}{\mu[n,m]\Gamma(L)}\right] + (L\nu - 1)\log(z[n,m])\\  -->
+<!-- 		&\quad\quad\quad- z^{\nu}[n,m]\left[\frac{\Gamma(L + 1/\nu)}{\mu[n,m]\Gamma(L)}\right]^{\nu}, -->
+<!-- 	\end{aligned} -->
+<!-- \end{equation*} -->
+<!-- where $w=\max{(p_1,p_2,q_1,q_2)}$. -->
+<!-- ::: -->
+
+<!-- ## Score vector -->
+<!-- :::{style="max-width: 100%;"} -->
+
+<!-- The score vector for $\boldsymbol{\delta}$ is -->
+<!-- \begin{align*} -->
+<!-- 	U_{\boldsymbol{\delta}}  -->
+<!-- 	= \left(  -->
+<!-- 	U_{L},\, -->
+<!-- 	U_{\nu},\,  -->
+<!-- 	U_\alpha,\,  -->
+<!-- 	U_{\boldsymbol{\beta}^{\top}},\,  -->
+<!-- 	U_{\boldsymbol{\phi}^{\top}},\,  -->
+<!-- 	U_{\boldsymbol{\theta}^{\top}}\,  -->
+<!-- 	\right)^\top  -->
+<!-- 	= \left(  -->
+<!-- 	\frac{\partial \ell}{\partial L}, -->
+<!-- 	\frac{\partial \ell}{\partial \nu}, -->
+<!-- 	\frac{\partial \ell}{\partial \alpha},  -->
+<!-- 	\frac{\partial \ell}{\partial \boldsymbol{\beta}^{\top}},  -->
+<!-- 	\frac{\partial \ell}{\partial \boldsymbol{\phi}^{\top}},  -->
+<!-- 	\frac{\partial \ell}{\partial \boldsymbol{\theta}^{\top}}  -->
+<!-- 	\right)^\top. -->
+<!-- \end{align*} -->
+
+<!-- Let $\boldsymbol{\lambda} = ( \alpha,\, \boldsymbol{\beta}^\top,\, \boldsymbol{\phi}^\top,\, \boldsymbol{\theta}^\top)^\top$ be the vector corresponding to the systematic component, we have -->
+<!-- $$ -->
+<!-- \frac{\partial\ell(\boldsymbol{\delta})}{\partial\lambda_i} = \sum_{n=w +1}^{N}\sum_{m=w +1}^{M} \frac{\partial\ell(\boldsymbol{\delta})}{\partial\mu[n,m]} \frac{d\mu[n,m]}{d\eta[n,m]} \frac{\partial\eta[n,m]}{\lambda_i}, -->
+<!-- $$ -->
+<!-- Note that $d\mu[n,m]/d\eta_t = 1/g'(\mu[n,m])$ [@Searle1971], then -->
+<!-- $$ -->
+<!-- \frac{\partial\ell(\boldsymbol{\delta})}{\partial\mu[n,m]} = \frac{\nu}{\mu[n,m]}\left\{\left[\frac{z[n,m]\Gamma(L + 1/\nu)}{\mu[n,m]\Gamma(L)}\right]^\nu - L\right\}. -->
+<!-- $$ -->
+
+<!-- ::: -->
+
+<!-- ## -->
+<!-- :::{style="max-width: 100%;"} -->
+<!-- For the systematic component, we have -->
+<!-- \begin{align*} -->
+<!-- 	\frac{\partial\eta[n,m]}{\partial\alpha} & = 1 -\sum_{s=0}^{q_1}\sum_{t=0}^{q_2}\theta_{st}\frac{\partial\eta[n-s,m-t]}{\partial\alpha}, \\ -->
+<!-- 	\frac{\partial\eta[n,m]}{\partial\gamma_{u}} &= x_u[n,m] - \sum_{s=1}^{p_1}\sum_{t=1}^{p_2}\phi_{st}x_u[n-s,m-t] -\sum_{s=0}^{q_1}\sum_{t=0}^{q_2}\theta_{st}\frac{\partial\eta[n-s,m-t]}{\partial\gamma_{u}}, \\ -->
+<!-- 	\frac{\partial\eta[n,m]}{\partial\phi_{ij}} &= g(z[n-i,m-j]) - \boldsymbol{x}^\top[n-i,m-j]\boldsymbol{\gamma} - \sum_{s=0}^{q_1}\sum_{t=0}^{q_2}\theta_{st}\frac{\partial\eta[n-s,m-t]}{\partial\phi_{ij}} , -->
+<!-- \end{align*} -->
+<!-- and -->
+<!-- \begin{align} -->
+<!-- \hspace{-6.9cm}	\frac{\partial\eta[n,m]}{\partial\theta_{kl}} &= e[n-k,m-l] - \sum_{s=0}^{q_1}\sum_{t=0}^{q_2}\theta_{st}\frac{\partial\eta[n-s,m-t]}{\partial\theta_{kl}}, -->
+<!-- \end{align} -->
+
+<!-- for $u=1,\ldots,r$, $\,i = 1,\ldots, p_1$, $\,j = 1,\ldots,p_2, k=1,\ldots,q_1, \text{ and }l=1,\ldots,q_2$.  -->
+<!-- ::: -->
+
+<!-- ## -->
+<!-- :::{style="max-width: 100%;"} -->
+<!-- Further, -->
+<!-- \begin{equation*} -->
+<!-- 	\begin{aligned} -->
+<!-- 		U_{\nu} = \sum_{n = w +1}^{N}&\sum_{m = w +1}^{M}  \Bigg\{\frac{1}{\nu} + \left[L - \left(\frac{z[n,m]\Gamma(L + 1/\nu)}{\mu[n,m]\Gamma(L)}\right)^{\nu}  \right]\\  -->
+<!-- 		&\times\left[\log\left(\frac{z[n,m]\Gamma(L + 1/\nu)}{\mu[n,m]\Gamma(L)}\right) - \frac{\psi^{(0)}(L + 1/\nu)}{\nu}\right]\Bigg\} -->
+<!-- 	\end{aligned} -->
+<!-- \end{equation*} -->
+<!-- and -->
+<!-- \begin{equation*} -->
+<!-- 	\begin{aligned} -->
+<!-- 		U_{L} = \sum_{n = w +1}^{N}&\sum_{m = w +1}^{M}\Bigg\{ -\psi^{(0)}(L)  +\nu\Bigg[\log\left(\frac{z[n,m]\Gamma(L+1/\nu)}{\mu[n,m]\Gamma(L)}\right) -->
+<!-- 		\\  -->
+<!-- 		& + \left(\left[\frac{z[n,m]\Gamma(L + 1/\nu)}{\mu[n,m]\Gamma(L)}\right]^{\nu} - L\right)\left[\psi^{(0)}(L) - \psi^{(0)}(L + 1/\nu)\right] \Bigg]\Bigg\}. -->
+<!-- 	\end{aligned} -->
+<!-- \end{equation*} -->
+<!-- ::: -->
+
+
+<!-- ##  -->
+<!-- :::{style="max-width: 100%;"} -->
+<!-- Writing the first derivative to respect the systematic component in matrix form, we have $U_{\boldsymbol{\lambda}} = \boldsymbol{O}^\top\boldsymbol{Ta}$, where $\boldsymbol{T} = \mathrm{diag}\left[1/g'(\mu[w+1,w+1]), 1/g'(\mu[w+1,w+2]), \ldots, 1/g'(\mu[N,M])\right]$, $\boldsymbol{d} = \left(\partial\eta[w+1,w+1]/\partial\alpha, \partial\eta[w+1,w+2]/\partial\alpha, \ldots, \partial\eta[N,M]/\partial\alpha\right)^\top$, $\boldsymbol{a} = (a[w+1,w+1], a[w+1,w+2], \ldots, a[N,M])^\top$ such that $a[n,m] = \partial\ell(\boldsymbol{\delta})/\partial\mu[n,m]$, and $\boldsymbol{O} = \left(\boldsymbol{d}, \boldsymbol{M}, \boldsymbol{P}, \boldsymbol{R}\right)$ is an matrix $(N-w)(M-w)\times (1 + r + p_1+p_2+p_1p_2 +q_1+q_2+q_1q_2 )$, in which $\boldsymbol{d}$ is an $(N-w)(M-w)$-dimensional vector, and $\boldsymbol{M}$,$\boldsymbol{P}$, and $\boldsymbol{R}$ are matrices with dimensions $(N-w)(M-w)\times r$, $(N-w)(M-w)\times (p_1+p_2+p_1p_2)$, and $(N-w)(M-w)\times (q_1+q_2+q_1q_2)$, respectively, such that their $[n,m]$ elements at $\gamma_r,\,\phi_{ij},$ and $\theta_{kl}$ columns are -->
+<!-- $$ -->
+<!-- M[n,m]_{\gamma_r} = \frac{\partial\eta[n,m]}{\partial\gamma_r}, \hspace{5pt} P[n,m]_{\phi_{ij}} = \frac{\partial\eta[n,m]}{\partial\phi_{ij}}, \text{ and}\hspace{5pt} R[n,m]_{\theta_{kl}} = \frac{\partial\eta[n,m]}{\partial\theta_{kl}}. -->
+<!-- $$ -->
+<!-- and -->
+<!-- \begin{align*} -->
+<!-- \boldsymbol{M} &= \left(\textrm{vec}(M[n,m]_{\gamma_1})\mid \ldots \mid \textrm{vec}(M[n,m]_{\gamma_r})\right) \\ -->
+<!-- \boldsymbol{P} &= \left(\textrm{vec}(P[n,m]_{\phi_{01}})\mid \ldots \mid \textrm{vec}(P[n,m]_{\phi_{p_1p_2}})\right) \\ -->
+<!-- \boldsymbol{R} &= \left(\textrm{vec}(R[n,m]_{\theta_{01}})\mid \ldots \mid \textrm{vec}(R[n,m]_{\theta_{q_1q_2}})\right) \\ -->
+<!-- \end{align*} -->
+
+<!-- ::: -->
+
+<!-- ## Fisher information matrix -->
+<!-- :::{style="max-width: 100%;"} -->
+<!-- Let us define $\mathcal{S}=\mathcal{P}(\mathcal{S}[n,m])$ as the set generated by all $\sigma$-algebra  of $\mathcal{S}[n,m],$ defined at a causal region of $(n,m)$. Using the Lemma in @Silva2023. We can derive that the Fisher information matrix (FIM) of the 2D generalized gamma model can be written as follows -->
+<!-- \begin{equation} -->
+<!-- \label{IFM} -->
+<!-- 	\begin{aligned} -->
+<!-- 		\boldsymbol{K}(\boldsymbol{\delta}) &= \begin{pmatrix} -->
+<!-- 			K_{L L} & K_{L \nu} &\boldsymbol{K}_{L \boldsymbol{\lambda}^\top} \\ -->
+<!-- 			K_{\nu L} & K_{\nu \nu} & \boldsymbol{K}_{\nu \boldsymbol{\lambda}^\top} \\ -->
+<!-- 			\boldsymbol{K}_{\boldsymbol{\lambda} L} & \boldsymbol{K}_{\boldsymbol{\lambda} \nu} &\boldsymbol{K}_{\boldsymbol{\lambda}\boldsymbol{\lambda}^\top} -->
+<!-- 		\end{pmatrix}, -->
+<!-- 	\end{aligned} -->
+<!-- \end{equation} -->
+<!-- where $K_{L L} = -\boldsymbol{1}^\top c_1,$  $\,K_{L \nu} = K_{\nu L} = -\boldsymbol{1}^\top c_2,$ $\,K_{\nu \nu} = -\boldsymbol{1}^\top c_4,$ $\,\boldsymbol{K}_{\boldsymbol{\lambda}L} = \boldsymbol{K}_{L\boldsymbol{\lambda}^\top}^\top = -c_3\boldsymbol{O}^\top\boldsymbol{W}_1$, $\,\boldsymbol{K}_{\boldsymbol{\lambda}\nu} = \boldsymbol{K}_{\nu\boldsymbol{\lambda}^\top}^\top = (\frac{c_3}{\nu} + \frac{1}{\nu} -1)\boldsymbol{O}^\top\boldsymbol{W}_1,$ $\,\boldsymbol{K}_{\boldsymbol{\lambda}\boldsymbol{\lambda}^\top} = \boldsymbol{O}^\top\boldsymbol{W}_2\boldsymbol{O}$, with $\boldsymbol{1}$ being $(N-w)(M-w)$-dimensional vector of ones,  -->
+<!-- \begin{align*} -->
+<!-- \boldsymbol{W}_1 &= \mathrm{diag} \left[ -->
+<!-- \frac{1}{\mu[w+1,w+1]g'(\mu[w+1,w+1])}, -->
+<!-- \ldots,\frac{1}{\mu[N,M]g'(\mu[N,M])}\right], -->
+<!-- \end{align*} -->
+<!-- and -->
+<!-- \begin{align*} -->
+<!-- \boldsymbol{W}_2 &= \mathrm{diag} \left[\frac{\nu^2 L}{\mu^2[w+1,w+1]\left[g'(\mu[w+1,w+1])\right]^2},  -->
+<!-- \ldots,\frac{\nu^2 L}{\mu^2[N,M]\left[g'(\mu[N,M])\right]^2}\right].  -->
+<!-- \end{align*} -->
+<!-- The constants $c_1,\ldots, c_4$ are given in the Appendix A in the dissertation. -->
+
+<!-- ::: -->
+
+## Prediction equation and accuracy measures
+:::{style="max-width: 100%;"}
+
+The estimated prediction equation of the spatial G$\Gamma$-ARMA is as follows
+\begin{align*}
+	\hat{\mu}[n,m] \,=\,g^{-1}&\left(\,\hat{\alpha} +\boldsymbol{x}^\top[n,m]\hat{\boldsymbol{\gamma}} + \sum^{p_1}_{i=0}\sum^{p_2}_{j=0}\hat{\phi}_{ij}\left\{g(y[n-i,m-j]) - \boldsymbol{x}^\top[n-i,m-j]\hat{\boldsymbol{\gamma}}\right\}\right.\\
+    &\left.+\sum^{q_1}_{k=0}\sum^{q_2}_{l=0}\hat{\theta}_{ij}e[n-i,m-j]\right), 
+\end{align*} 
+for $n=w+1,\ldots,N,\text{and }m=w+1,M.$ In this work, we use three performance metrics to evaluate the accuracy of the fitted models:
+\begin{align*}
+	\text{MSE} &= \frac{1}{NM} \sum\limits_{n=w+1}^{N}\sum\limits_{m=w+1}^{M} e^2[n,m], 
+	\,\,
+	\text{MAPE} = \frac{1}{NM} \sum\limits_{n=w+1}^{N}\sum\limits_{m=w+1}^{M} \frac{\lvert e[n,m]  \rvert}{\lvert z[n,m] \rvert}, \,\,
+\end{align*}
+and
+\begin{align*}
+	\text{MAE} &=  \frac{1}{NM} \sum\limits_{n=w+1}^{N}\sum\limits_{m=w+1}^{M} |e[n,m]|,
+\end{align*}
+\noindent where $e[n,m] = z[n,m] - \hat{\mu}[n,m]$. The mean square error (MSE) is scale-dependent, and the mean absolute error (MAE) and the mean absolute percentage error (MAPE) are not scale-dependent.
+:::
+
+<!-- ## Simulation study -->
+<!-- :::{style="max-width: 100%;"} -->
+
+<!-- The simulation study has two objectives: To investigate the properties of textures on SAR images through the generalized gamma 2D-ARMA process and to evaluate the reasonableness of the estimates of the proposed model parameters and quantify their asymptotic behavior. According to~\citeonline{Lee2011}, the choice of logarithmic function as a link function in Eq.~\eqref{eqmain} is because it is (to our knowledge) the only one that makes a connection to physics by transforming the multiplicative speckle effect into an additive one. We used two models (which are commonly suggested by information criteria in practice) in the simulations:  -->
+
+<!-- -   2D G$\Gamma$-AR(1,1): -->
+<!-- \begin{align*} -->
+<!-- g(Z[i,j])&=\mathbb{E}\big\{Z[i,j]\mid\mathcal{S}[i,j]\big\}+E[i,j]\\ -->
+<!-- &=\underbrace{\alpha+\phi_{10}g(z[i-1,j])+\phi_{01}g(z[i,j-1])+\phi_{11}g(z[i-1,j-1])}_{\text{Observed part, } S[i,j]=\{\,z[i-1,j],\,\,z[i,j-1],\,\,z[i-1,j-1]\,\}}+E[i,j]. -->
+<!-- \end{align*} -->
+
+<!-- -   2D G$\Gamma$-ARMA(1,1,1,1): -->
+<!-- \begin{align*} -->
+<!-- g(Z[i,j])=&\,\,\mathbb{E}\big\{Z[i,j]\mid S[i,j]\big\}+E[i,j]\\ -->
+<!-- =&\,\,\underbrace{\alpha+\phi_{10}g(z[i-1,j])+\phi_{01}g(z[i,j-1])+\phi_{11}g(z[i-1,j-1])}_{\text{Observed part, } S[i,j]=\{\,z[i-1,j],\,\,z[i,j-1],\,\,z[i-1,j-1]\,\}}\\ -->
+<!-- & +\underbrace{\theta_{10}e[i-1,j]+\theta_{01}e[i,j-1]+\theta_{11}e[i-1,j-1]}_{\text{Observed part, } S[i,j]=\{\,e[i-1,j],\,\,e[i,j-1],\,\,e[i-1,j-1]\,\}}+E[i,j]. -->
+<!-- \end{align*} -->
+<!-- ::: -->
+
+## Simulation study scenarios and used measures
+:::{style="max-width: 100%;"}
+**Table:** True value of the parameters for each simulation scenario
+$$
+\begin{array}{ccccccccc}
+\hline
+\text{Parameters} & \nu & \alpha & \phi_{01} & \phi_{10} & \phi_{11} & \theta_{01} & \theta_{10} & \theta_{11} \\ \hline
+\text{Scenario 1} & 1.03  & -3.29    & 0.14        & 0.13        & -           & -             & -             & -             \\
+\text{Scenario 2} & 0.88  & 0.25     & 0.37        & 0.12        & 0.04        & -             & -             & -             \\
+\text{Scenario 3} & 0.89  & -0.61    & 0.11        & 0.64        & -           & 0.09          & -0.31         & -             \\
+\text{Scenario 4} & 0.55  & -1.99    & 0.02        & 0.62        & -0.48       & 0.13          & -0.52         & 0.18          \\ \hline
+\end{array}
+$$
+We calculate the relative bias (RB), standard deviation (Std Dvt), and mean squared error (MSE) of the estimates using the Monte Carlo study with 10000 replicates. The measures are defined as
+\begin{align*}
+    MSE &= \sum_{j=1}^{10000}\frac{\left(\hat{\delta}_j(i) - \delta(i)\right)^2}{10000},\,\, RB = \left(\sum_{j=1}^{10000}\frac{\hat{\delta}_j(i)}{\delta_j(i)}/10000 - 1\right)\times 100, \\
+    \textrm{and } Std\,Dvt &= \sum_{j=1}^{10000}\frac{\left(\hat{\delta}_j(i) - \bar{\delta}(i)\right)^2}{10000}
+\end{align*}
+where $\hat{\delta}_{ij}$ is the $j$-th estimate of the $i$-th parameter of $\boldsymbol{\delta}$, $\delta_i$ is the true value of the $i$-th parameter, and $\bar{\delta}_i = \sum_{j=1}^{10000}\hat{\delta}_{ij}/10000$.
+
+:::{.notes}
+Each selected parameter comes from a fitted model for specific image textures.
+For example, we distinguish three typical textures in SAR images (water, forest, and city) and estimate the parameters of the models for each scenario.
+We also select a hybrid scene (a mixture of estuary and forest textures). For the AR($p_1,p_2$) and MA($q_1,q_2$) models, we found that the estimation of the interaction parameter $\phi_{11}$ was not statistically significant for the selected uniform textures (e.g., estuarine, forest or urban texture only), so for those textures we only estimated the parameters $\phi_{10} \text{ and }\phi_{01}$
+and treat $\phi_{11}$ as $\phi_{10}\phi_{01}=\phi_{11}$.
+This configuration is similar to the model presented in detail by Martin~\cite{MARTIN1979, Martin1990}. He argued that this model is not only a computational improvement but is also widely used in nature, and our result agrees.
+However, the $\phi_{11}$ estimate is statistically significant when hybrid textures are involved.
+Therefore, we include it in the simulations for this texture, suggesting that using the estimated $\phi_{11}$ as an additional parameter is preferable when dealing with different textures in the image.
+:::
+
+:::
+
+## Simulation study: Scenario 1
+:::{style="max-width: 100%;"}
+**Table:** Relative bias, standard error, and mean square error values of the parameter estimates for the process 2D G$\Gamma$-AR(1,1) to lake texture
+
+|||| **$L=1$** |  |  | **$L = 3$** |  |
+|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|
+| Parameter | $N = M$ | **RB (%)** | **Std Dvt** | **MSE** | **RB (%)** | **Std Dvt** | **MSE** |
+|           | 7  | 7.94  | 1.0988 | 1.2755 | 8.41  | 0.9987 | 1.0739 |
+| **$\alpha$** | 11 | 2.58  | 0.6411 | 0.4181 | 2.42  | 0.6363 | 0.4112 |
+|           | 17 | 0.72  | 0.4229 | 0.1794 | 0.04  | 0.4895 | 0.2396 |
+|           | 7  | 7.91  | 0.1603 | 0.0323 | 6.92  | 0.1491 | 0.0273 |
+| **$\nu$** | 11 | 2.59  | 0.0859 | 0.0081 | 2.32  | 0.0818 | 0.0073 |
+|           | 17 | 0.99  | 0.0519 | 0.0028 | 0.83  | 0.0515 | 0.0027 |
+|              | 7  | -15.24 | 0.1363 | 0.0190 | -19.12 | 0.1418 | 0.0207 |
+| **$\phi_{01}$** | 11 | -4.24  | 0.0766 | 0.0059 | -5.59  | 0.0864 | 0.0075 |
+|              | 17 | -1.38  | 0.0487 | 0.0024 | 0.18   | 0.0596 | 0.0036 |
+|              | 7  | -12.87 | 0.1342 | 0.0183 | -17.39 | 0.1402 | 0.0202 |
+| **$\phi_{10}$** | 11 | -4.27  | 0.0771 | 0.0060 | -4.68  | 0.0862 | 0.0075 |
+|              | 17 | -0.98  | 0.0478 | 0.0023 | -0.48  | 0.0596 | 0.0035 |
+
+:::{.notes}
+Observamos que o viés relativo, o desvio padrão e o erro quadrático médio diminuem à medida que o tamanho da amostra aumenta para a estrutura de lagos do modelo autorregressivo bidimensional.
+Além disso, os parâmetros $\alpha$ e $\nu$ são, em geral, superestimados, enquanto os parâmetros autorregressivos $(\phi_{ij})$ são subestimados, de acordo com o viés relativo.
+Basu também observou que os estimadores de máxima verossimilhança tendem a subestimar os parâmetros autorregressivos em modelos espaciais.
+Observamos ainda que, ao utilizar uma janela de tamanho $11 \times 11$, o viés relativo dos estimadores permanece, em geral, abaixo de 5%, o que indica que este é um tamanho de janela apropriado para aplicações práticas.
+As estimativas para $L=1$ e $L=3$ apresentam pequenas diferenças: para amostras pequenas, as estimativas com $L=3$ tendem a ser mais viesadas, mas esse viés diminui mais rapidamente com o aumento do tamanho da amostra, em comparação com $L=1$.
+Esse comportamento é esperado no cenário físico, em que imagens SAR tendem a apresentar maior nível de ruído para $L=1$.
+O erro quadrático médio (MSE) dos parâmetros $\alpha$ e $\nu$ diminui quando se passa de $L=1$ para $L=3$, enquanto para os parâmetros autorregressivos ocorre um aumento; comportamento semelhante é observado para o desvio padrão.
+Ainda assim, as medidas de variabilidade permanecem baixas em ambos os casos, indicando a boa precisão das estimativas.
+:::
+
+:::
+
+## Simulation study: Scenario 2
+:::{.scrollable style="max-height: 630px; overflow-y: auto; border: 0px solid #ccc; padding: 5px;"}
+**Table:** Relative bias, standard error, and mean squared error values of parameter estimates for the process 2D G$\Gamma$-AR(1,1) to hybrid texture
+
+|||| **$L=1$** |  |  | **$L = 3$** |  |
+|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|
+| Parameter | $N = M$ | **RB (%)** | **Std Dvt** | **MSE** | **RB (%)** | **Std Dvt** | **MSE** |
+|           | 7  | -50.23  | 0.3145 | 0.1147 | -8.66  | 0.1354 | 0.0188 |
+| **$\alpha$** | 11 | -19.52  | 0.1692 | 0.0310 | -3.03  | 0.0724 | 0.0053 |
+|           | 17 | -8.05   | 0.1030 | 0.0110 | -0.94  | 0.0428 | 0.0018 |
+|           | 7  | 9.96  | 0.1394 | 0.0271 | 8.78  | 0.1279 | 0.0223 |
+| **$\nu$** | 11 | 3.27  | 0.0740 | 0.0063 | 2.89  | 0.0683 | 0.0053 |
+|           | 17 | 1.16  | 0.0445 | 0.0021 | 1.19  | 0.0419 | 0.0019 |
+|              | 7  | -15.34  | 0.1432 | 0.0208 | -24.69  | 0.1578 | 0.0258 |
+| **$\phi_{01}$** | 11 | -4.59   | 0.0808 | 0.0066 | -9.88   | 0.0928 | 0.0088 |
+|              | 17 | -2.73   | 0.0495 | 0.0025 | -2.83   | 0.0574 | 0.0033 |
+|              | 7  | -8.57  | 0.1394 | 0.0204 | -13.16  | 0.1539 | 0.0261 |
+| **$\phi_{10}$** | 11 | -3.75  | 0.0769 | 0.0061 | -4.71   | 0.0873 | 0.0079 |
+|              | 17 | -1.57  | 0.0476 | 0.0023 | -2.07   | 0.0535 | 0.0029 |
+|              | 7  | -19.93  | 0.1468 | 0.0216 | -39.27  | 0.1632 | 0.0269 |
+| **$\phi_{11}$** | 11 | -10.13  | 0.0814 | 0.0066 | -12.67  | 0.0937 | 0.0088 |
+|              | 17 | -4.40   | 0.0511 | 0.0026 | -8.19   | 0.0583 | 0.0034 |
+
+
+:::{.notes}
+O modelo anterior é considerado o processo introduzido por Martin, ou seja, $\phi_{11} = \phi_{01} \phi_{10}$.
+No entanto, conforme constatamos, essa suposição deixou de ser válida quando as texturas foram misturadas.
+Dessa forma, também consideramos a estimação de $\phi_{11}$ como um parâmetro independente para a textura híbrida.
+A Tabela~\ref{ar1hybrid} mostra que o viés relativo, o desvio padrão e o erro quadrático médio diminuem com o aumento do tamanho da amostra para $L=1$ e $L=3$.
+Observamos também que o viés relativo do estimador de $\nu$ foi superestimado, enquanto os parâmetros da componente sistemática foram subestimados, tal como ocorreu na estrutura de lagos para os parâmetros autorregressivos.
+O viés relativo associado foi maior para $L=3$ do que para $L=1$ nos parâmetros da componente sistemática; para $\nu$, o viés relativo foi relativamente desprezível para amostras pequenas.
+O erro quadrático médio (MSE) e o desvio padrão para a textura híbrida foram menores do que aqueles definidos para a textura de lagos, embora o viés tenha sido maior tanto para amostras pequenas quanto para amostras grandes.
+:::
+
+:::
+
+## Simulation study: Scenario 3
+:::{.scrollable style="max-height: 630px; overflow-y: auto; border: 0px solid #ccc; padding: 5px;"}
+**Table:** Relative bias, standard error, and mean squared error values of parameter estimates for the process 2D G$\Gamma$-ARMA(1,1,1,1) to lake texture
+
+|||| **$L=1$** |  |  | **$L = 3$** |  |
+|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|
+| Parameter  | $N = M$ | RB (%)  | Std Dvt  | MSE  | RB (%)  | Std Dvt  | MSE  |
+|            | 7      | 33.91  | 0.7612 | 0.6221 | 3.85  | 0.4947 | 0.2453 |
+| $\alpha$ | 11     | -0.41  | 0.6307 | 0.3978 | 0.98  | 0.3570 | 0.1274 |
+|            | 17     | -20.20 | 0.6565 | 0.4461 | 0.91  | 0.1485 | 0.0221 |
+|            | 7      | 8.80   | 0.1527 | 0.0294 | 6.92   | 0.1462 | 0.0252 |
+| $\nu$ | 11     | -0.40  | 0.0915 | 0.0084 | 0.58   | 0.0848 | 0.0072 |
+|            | 17     | -5.86  | 0.1292 | 0.9341 | 0.75   | 0.0433 | 0.0019 |
+|            | 7      | 66.12  | 0.2108 | 0.0497 | 73.45  | 0.2114 | 0.0512 |
+| $\phi_{01}$ | 11     | 45.69  | 0.1202 | 0.0170 | 36.02  | 0.1191 | 0.0158 |
+|            | 17     | 38.44  | 0.0995 | 0.0919 | 17.10  | 0.0517 | 0.0030 |
+|            | 7      | -20.12 | 0.2451 | 0.0766 | -13.86 | 0.2357 | 0.0634 |
+| $\phi_{10}$ | 11     | -11.59 | 0.1573 | 0.0303 | -8.28  | 0.1472 | 0.0245 |
+|            | 17     | -7.20  | 0.1372 | 0.0897 | -4.24  | 0.0705 | 0.0057 |
+|            | 7      | -199.95 | 0.3322 | 0.1427 | -159.46 | 0.3716 | 0.1587 |
+| $\theta_{01}$ | 11     | -55.59  | 0.1622 | 0.0288 | -40.62  | 0.1745 | 0.0318 |
+|            | 17     | -32.66  | 0.1284 | 0.1653 | -23.98  | 0.0800 | 0.0069 |
+|            | 7      | -34.94  | 0.3575 | 0.1396 | 3.63    | 0.3853 | 0.1485 |
+| $\theta_{10}$ | 11     | -23.09  | 0.2034 | 0.0465 | -12.00  | 0.2198 | 0.0497 |
+|            | 17     | -12.54  | 0.1757 | 0.1077 | -8.14   | 0.1038 | 0.0114 |
+
+:::{.notes}
+Para a estrutura de lagos e o modelo autorregressivo-média móvel bidimensional, a Tabela~\ref{arma11ocean} mostra que o viés relativo dos estimadores autorregressivo e de média móvel diminuiu para $L=1$.
+No entanto, eles foram instáveis para $\alpha$ e $\nu$.
+O erro quadrático médio (MSE) foi instável, embora pequeno, para todos os parâmetros em $L=1$.
+O desvio padrão das estimativas também diminuiu de forma geral.
+Para $L=3$, o viés relativo diminuiu, e o MSE e o desvio padrão reduziram-se à medida que o tamanho da amostra aumentava.
+Além disso, todas as medidas foram significativamente menores para $L=3$ do que para $L=1$.
+A inferência estatística no modelo espacial G$\Gamma$-ARMA tende a exigir janelas maiores para imagens com um único número de visadas (looks) na textura de lagos.
+Isso sugere que o modelo espacial G$\Gamma$-ARMA é mais adequado para imagens SAR multilook.
+:::
+
+:::
+
+## Simulation study: Scenario 4
+:::{.scrollable style="max-height: 630px; overflow-y: auto; border: 0px solid #ccc; padding: 5px;"}
+**Table:** Relative bias, standard error, and mean squared error values of parameter estimates for the process 2D G$\Gamma$-ARMA(1,1,1,1) to hybrid texture
+
+||  |  |    **$L = 1$** |           |  |    **$L = 3$** |           |
+|-------|-------|-------|-------|-------|-------|-------|-------|
+| Parameter | $N=M$ | RB (\%) | Std Dvt  | MSE | RB (\%)     | Std Dvt  | MSE       |
+|                | 7 | 18.99   | 1.0016   | 1.1459    | 14.03       | 0.8185   | 0.7479    |
+| $\alpha$ | 11 | 7.36        | 0.4366   | 0.2120    | 5.87        | 0.3820   | 0.1595    |
+|                | 17 | 4.33        | 0.2416   | 0.0658    | 2.49        | 0.1976   | 0.0415    |
+|| 7     | 16.33       | 0.1227   | 0.0231    | 18.81       | 0.1274   | 0.0269    |
+| $\nu$          | 11    | 0.27        | 0.0490   | 0.0024    | 1.63        | 0.0455   | 0.0021    |
+|                | 17    | -2.54       | 0.0299   | 0.0011    | -0.94       | 0.0265   | 0.0007    |
+|| 7     | 227.80      | 0.2615   | 0.0705    | 9.02        | 0.2487   | 0.0618    |
+| $\phi_{01}$    | 11    | 194.57      | 0.1376   | 0.0205    | -27.90      | 0.1302   | 0.0170    |
+|                | 17    | 160.67      | 0.0761   | 0.0068    | -19.58      | 0.0706   | 0.0050    |
+|| 7     | -25.20      | 0.2423   | 0.0831    | -20.25      | 0.2377   | 0.0723    |
+| $\phi_{10}$    | 11    | -14.92      | 0.1188   | 0.0227    | -9.04       | 0.1030   | 0.0138    |
+|                | 17    | -8.23       | 0.0587   | 0.0061    | -3.70       | 0.0453   | 0.0026    |
+|| 7     | -8.56       | 0.2605   | 0.0696    | -9.17       | 0.2647   | 0.0720    |
+| $\phi_{11}$    | 11    | 3.97        | 0.1464   | 0.0218    | -2.39       | 0.1516   | 0.0231    |
+|                | 17    | 8.22        | 0.0915   | 0.0099    | -0.48       | 0.0914   | 0.0084    |
+|| 7     | -38.22      | 0.4869   | 0.2395    | 29.95       | 0.5467   | 0.3003    |
+| $\theta_{01}$  | 11    | -56.85      | 0.1852   | 0.0398    | -6.47       | 0.1927   | 0.0372    |
+|                | 17    | -52.26      | 0.0997   | 0.0146    | -13.52      | 0.0974   | 0.0098    |
+|| 7     | -11.39      | 0.4605   | 0.2155    | 13.52       | 0.5267   | 0.2824    |
+| $\theta_{10}$  | 11    | -24.20      | 0.1702   | 0.0448    | -11.11      | 0.1716   | 0.0328    |
+|                | 17    | -17.85      | 0.0887   | 0.0165    | -8.89       | 0.0792   | 0.0084    |
+|| 7     | 23.51       | 0.4254   | 0.1827    | 25.97       | 0.4932   | 0.2454    |
+| $\theta_{11}$  | 11    | 16.75       | 0.1786   | 0.0328    | 5.02        | 0.1989   | 0.0397    |
+|                | 17    | 20.63       | 0.1047   | 0.0123    | -0.03       | 0.1097   | 0.0120    |
+
+:::{.notes}
+Para a textura híbrida, na Tabela mostra que o comportamento das estimativas para $L=1$ foi semelhante ao observado na Tabela anterior.
+Embora o erro quadrático médio (MSE) e o desvio padrão tenham diminuído com o aumento do tamanho da amostra, o viés relativo permaneceu instável.
+Também observamos um viés relativo considerável para parâmetros de baixo valor, como $\phi_{01}$.
+Para $L=3$, o modelo espacial G$\Gamma$-ARMA foi mais estável, com o viés relativo dos parâmetros diminuindo de forma geral à medida que o tamanho da amostra aumentava e o MSE também reduzindo com o aumento do tamanho da amostra.
+Além disso, o modelo espacial G$\Gamma$-ARMA para $L=3$ reduziu significativamente o viés relativo, o desvio padrão e o MSE para amostras grandes.
+Para os modelos espaciais G$\Gamma$-ARMA, não foi possível verificar se os estimadores de máxima verossimilhança subestimaram os parâmetros autorregressivos.
+:::
+:::
+
+
+## Moran's index and Mahalanobis distance
+
+:::{style="max-width: 100%;"}
+The formula for the Moran index, in our case, is as follows:
+\begin{equation}
+I = \frac{\sum_{t_1\neq t_2}^P \sum_{t_2= 1}^P w_{t_1t_2} (Z_{t_1} - \bar{Z})(Z_{t_2} - \bar{Z})}{\sum_{t_1=1}^P (Z_{t_1} - \bar{Z})^2 },
+\end{equation}
+where $Z_t$ is the $t$-th element of $\mathbf{Z} = (Z[1,1], Z[1,2],\ldots, Z[2,1],\ldots, Z[N,M])^\top$, $\bar{Z} = 1/P \sum_{t=1}^P Z_t$, $P = N \times M$ is the total number of pixels in the rectangular grid $N \times M$, $w_{t_1t_2}$ represents the spatial weight between pixels $t_1$ and $t_2$. Also, the Mahalanobis distance between two points in the parameter space is given by
+\begin{equation}
+d_M(\hat{\boldsymbol{\beta}}_1,\hat{\boldsymbol{\beta}}_0) = \sqrt{\left(\hat{\boldsymbol{\beta}}_1 - \hat{\boldsymbol{\beta}}_0 \right)^\top\hat{\boldsymbol{\Sigma}}^{-1}_{\hat{\boldsymbol{\beta}}_1}\left(\hat{\boldsymbol{\beta}}_1 - \hat{\boldsymbol{\beta}}_0 \right)},
+\end{equation}
+where $\hat{\boldsymbol{\beta}}_0$ is the estimated vector from the reference class, $\hat{\boldsymbol{\beta}}_1$ is the vector of interest and $\boldsymbol{\Sigma}_{\hat{\boldsymbol{\beta}}_1}=\boldsymbol{K}(\hat{\boldsymbol{\beta}}_1)$ is the covariance matrix defined at $\hat{\boldsymbol{\beta}}_1$.
+:::
+
+
+<!-- ::::{.columns} -->
+<!-- ::: {.column width="50%"} -->
+<!-- The formula for the Moran index, in our case, is as follows: -->
+<!-- \begin{equation} -->
+<!-- I = \frac{\sum_{t_1\neq t_2}^P \sum_{t_2= 1}^P w_{t_1t_2} (Z_{t_1} - \bar{Z})(Z_{t_2} - \bar{Z})}{\sum_{t_1=1}^P (Z_{t_1} - \bar{Z})^2 }, -->
+<!-- \end{equation} -->
+<!-- where $Z_t$ is the $t$-th element of $\mathbf{Z} = (Z[1,1], Z[1,2],\ldots, Z[2,1],\ldots, Z[N,M])^\top$, $\bar{Z} = \frac{1}{P} \sum_{t=1}^P Z_t$, \(P = N \times M\) is the total number of pixels in the rectangular grid \(N \times M\), \(w_{t_1t_2}\) represents the spatial weight between pixels \(t_1\) and \(t_2\). -->
+
+<!-- ::: -->
+
+<!-- ::: {.column width="50%"} -->
+<!-- The Mahalanobis distance between two points in the parameter space is given by -->
+<!-- \begin{equation} -->
+<!-- d_M(\hat{\boldsymbol{\beta}}_1,\hat{\boldsymbol{\beta}}_0) = \sqrt{\left(\hat{\boldsymbol{\beta}}_1 - \hat{\boldsymbol{\beta}}_0 \right)^\top\hat{\boldsymbol{\Sigma}}^{-1}_{\hat{\boldsymbol{\beta}}_1}\left(\hat{\boldsymbol{\beta}}_1 - \hat{\boldsymbol{\beta}}_0 \right)}, -->
+<!-- \end{equation} -->
+<!-- where $\hat{\boldsymbol{\beta}}_0$ is the estimated vector from the reference class, $\hat{\boldsymbol{\beta}}_1$ is the vector of interest and $\boldsymbol{\Sigma}_{\hat{\boldsymbol{\beta}}_1}=\boldsymbol{K}(\hat{\boldsymbol{\beta}}_1)$ is the covariance matrix defined at $\hat{\boldsymbol{\beta}}_1$. -->
+<!-- ::: -->
+<!-- :::: -->
+
+## Application
+### SAR images from surroundings of Porto Alegre
+::::{.columns}
+::: {.column width="50%"}
+![](Images/nov2023_2.png){width=100%}
+November 2023
+:::
+
+::: {.column width="50%"}
+![](Images/may2024_2.png){width=100%}
+May 2024
+:::
+::::
+
+
+## Selected region and its prediction 
+
+:::: {.columns}
+
+::: {.column width="49%" style="text-align: center;"}
+![](Images/recorte1.png){fig-alt="Descrição da imagem" width=49% .fragment}
+<p style="font-size: 14px; margin-top: 5px;">Figure 1: Intensity SAR image of selected region.</p>
+![](Images/fittedgg1.png){fig-alt="Descrição da imagem" width=49% .fragment}
+<p style="font-size: 14px; margin-top: 5px;">Figure 2: Estimated SAR image from 2D G$\Gamma$-ARMA</p>
+:::
+
+::: {.column width="49%" style="text-align: center;"}
+![](Images/fittedr1.png){fig-alt="Descrição da imagem" width=49% .fragment}
+<p style="font-size: 14px; margin-top: 5px;">Figure 3: Estimated SAR image from 2D R-ARMA.</p>
+
+![](Images/fittedg1.png){fig-alt="Descrição da imagem" width=49% .fragment}
+<p style="font-size: 14px; margin-top: 5px;">Figure 4: Estimated SAR image from 2D $\Gamma$-ARMA.</p>
+:::
+
+::::
+
+## Parameter estimates of the spatial models on the selected region
+
+::: {.center}
+
+| Estimates     | 2D GΓ-AR       | 2D R-ARMA       | 2D Γ-ARMA       |
+|------------------|---------------|----------------|----------------|
+| $\hat{\alpha}$ (s.e.)      | 0.2712 (0.0135)  | 0.7517 (0.0095)  | 0.2741 (0.0075)  |
+| $\hat{\phi}_{11}$ (s.e.)   | -0.0201 (0.0084) | -0.5205 (0.0088) | -0.2918 (0.0143) |
+| $\hat{\phi}_{01}$ (s.e.)   | 0.3059 (0.0078)  | 0.7074 (0.0087)  | 0.6406 (0.0131)  |
+| $\hat{\phi}_{10}$ (s.e.)   | 0.6579 (0.0061)  | 0.9208 (0.0041)  | 0.6604 (0.0081)  |
+| $\hat{\theta}_{11}$ (s.e.) | -               | 0.3622 (0.0049)  | 0.0187 (0.008)   |
+| $\hat{\theta}_{01}$ (s.e.) | -               | -0.4045 (0.0051) | -0.371 (0.0156)  |
+| $\hat{\theta}_{10}$ (s.e.) | -               | -0.4674 (0.0051) | -0.051 (0.0103)  |
+| $\hat{\nu}$ (s.e.)         | 0.6272 (0.0036)  | -                | -                |
+:::
+
+
+## Accuracy measures for the spatial models
+
+::: {.center}
+| Models          | MSE       | MAPE   | MAE    |
+|----------------|-----------|--------|--------|
+| 2D G$\Gamma$-AR  | 42.9401   | **1.8684** | **0.583**   |
+| 2D R-ARMA        | 263.9805  | 4.8344 | 1.5924 |
+| 2D $\Gamma$-ARMA | **40.7256**   | 1.8753 | 0.5875 |
+:::
+
+## Moran's correlogram on the residuals
+::::{.columns}
+::: {.column width="33%"}
+![](Images/ggar11correlogram.png){width=100%}
+:::
+
+::: {.column width="33%"}
+![](Images/garma11correlogram.png){width=100%}
+:::
+
+::: {.column width="33%"}
+![](Images/rarma11correlogram.png){width=100%}
+:::
+::::
+
+## Flood detection
+:::: {.columns}
+
+::: {.column width="49%" style="text-align: center;"}
+![](Images/recorte1.png){fig-alt="Descrição da imagem" width=49% .fragment}
+<p style="font-size: 14px; margin-top: 5px;">Area - Nov 2023</p>
+![](Images/classifiedimage.png){fig-alt="Descrição da imagem" width=49% .fragment}
+<p style="font-size: 14px; margin-top: 5px;">Classified Area - Nov 2023</p>
+:::
+
+::: {.column width="49%" style="text-align: center;"}
+![](Images/recorte12.png){fig-alt="Descrição da imagem" width=49% .fragment}
+<p style="font-size: 14px; margin-top: 5px;">Area - May 2024</p>
+
+![](Images/classifiedfloodedimagefinal.png){fig-alt="Descrição da imagem" width=49% .fragment}
+<p style="font-size: 14px; margin-top: 5px;">Classified Area - May 2024</p>
+:::
+
+::::
+
+
+##
+:::{style="max-width: 100%; text-align: center;"}
+![](Images/heatmapchangefinal.png){fig-alt="Descrição da imagem" width=70% .fragment}
+<p style="font-size: 15px; margin-top: 5px;">Changes: 1 - Water to Water, 2 - Forest to Forest, 3 - City to City, 4 - Water to Forest, 5 - Water to City, 6 - Forest to Water, 7 - Forest to City, 8 - City to Water, and 9 - City to Forest.</p>
+:::
+
+## Flooded area
+:::{style="max-width: 100%; text-align: center;"}
+![](Images/flood11pixelr.png){fig-alt="Descrição da imagem" width=55% .fragment}
+<p style="font-size: 15px; margin-top: 5px;">Flood detection in the selected region</p>
+:::
+
+## Conclusion
+:::{style="max-width: 100%;"}
+-   Proposing the 2D G$\Gamma$-ARMA model, its theoretical properties, and physical interpretation.
+-   The model can describe both amplitude (single look or multilook) and intensity (single look or multilook) of SAR images.
+-   The proposed model showed competitive results against the ones found in the literature.
+-   The proposed model were able to detect changes in image texture.
+:::
+
+
+# Estimation of the equivalent number of looks in correlated SAR image
+
+## Introduction
+:::{style="max-width: 100%;"}
+-   ENL and its importance [@Oliver2004] [@Xu2015] [@Cassetti2022]
+-   Past and current state of ENL estimation [@Anfinsen2009] [@Qin2023]
+-   Our proposal
+
+:::{.notes}
+O ENL é uma medida que quantifica o nível de ruído speckle e a homogeneidade de regiões em imagens SAR. O ENL pode ser usado para avaliar a qualidade da imagem e para melhorar etapas de processamento, como filtragem, segmentação e classificação. 
+<!-- O número de looks refere-se à quantidade real de observações independentes usadas para reduzir o ruído em imagens SAR, enquanto o ENL é uma medida estatística que avalia o nível de ruído ou homogeneidade da imagem após o processamento, podendo diferir do número real de looks devido a fatores como correlação, textura e métodos de processamento. -->
+
+O ENL é estimado a partir de propriedades estatísticas das imagens SAR/PolSAR, como variância do ruído, momentos da matriz de covariância, cumulantes logarítmicos ou por máxima verossimilhança também. No entanto, todos esses métodos, pelo que sei, ainda parte da suposição de que os pixels são independentes, o que não condiz com a realidade das imagens SAR, onde existe correlação espacial. Por isso, surge a necessidade de desenvolver métodos de estimação do ENL que levem em conta a correlação espacial.
+
+Ao considerar a correlação espacial, é possível corrigir a subestimação do ENL causada pelo ruído correlacionado, aproximando o valor estimado do ENL ao que seria obtido em imagens se os pixels fossem independentes. Uma estimativa precisa permite identificar com mais confiança áreas homogêneas e distinguir regiões com diferentes propriedades de dispersão, o que é fundamental para segmentação, classificação e detecção de alvos. 
+<!-- Métodos tradicionais podem superestimar a qualidade de técnicas de filtragem e classificação se o ENL for subestimado ou superestimado, levando a decisões menos confiáveis. Estimações mais precisas do ENL permitem ajustar melhor os parâmetros desses algoritmos, otimizando o equilíbrio entre redução de ruído e preservação de detalhes.  -->
+:::
+:::
+
+## Estimation of the equivalent number of looks
+::::{.columns}
+::: {.column width="100%"}
+The traditional method for estimating the ENL is to use the inverse of the SCV in one polarization channel at a time [@Lee2009], which means that
+\begin{equation}
+    ENL \triangleq \frac{1}{CV^2},    
+\end{equation}
+where the ENL is estimated for each channel and the results are then averaged [@Frery2007]. 
+:::
+
+<!-- ::: {.column width="50%"} -->
+
+<!-- ::: -->
+::::
+
+
+
+
+
+## Impact of spatial autocorrelation on the equivalent number of looks 
+:::{style="max-width: 100%;"}
+The Moran index is commonly used to measure the spatial autocorrelation of a given dataset [@Chen2021] and, in our case, can be written as follows
+\begin{equation}
+    \tau = \frac{\mathbf{Z}^\top\mathbf{W}\mathbf{Z}}{\mathbf{Z}^\top\mathbf{Z}},
+\end{equation}
+where $\mathbf{Z} = \left(Z[1,1] - \bar{Z}, Z[1,2] - \bar{Z}, \ldots, Z[N, M] - \bar{Z}\right)^\top$, $\bar{Z} = \sum_{n=1}^N\sum_{m=1}^M Z[n,m]/NM$, and $\mathbf{W}$ is the weighting matrix using the queen neighborhood structure and the sum of the rows as 1.
+Note that $\mathbf{Z}^\top\mathbf{Z} = NM\hat{\sigma}^2_{obs}$ is a function of the estimator for the sample variance. So if $\tau = 0$, the dependency structure is absent in the data. Furthermore, we can have $\tau > 0$ or $\tau < 0$, which characterizes a positive or negative spatial autocorrelation. In this way, we can factorize the total variability $\boldsymbol{Z}^\top\boldsymbol{Z}$ as follows
+\begin{equation}
+    \boldsymbol{Z}^\top\boldsymbol{Z} = \underbrace{\boldsymbol{Z}^\top\boldsymbol{W}\boldsymbol{Z}}_{\text{Spatial correlation}}+ \underbrace{\boldsymbol{Z}^\top\left( \boldsymbol{I} - \boldsymbol{W}\right)\boldsymbol{Z}}_{\text{Variance without spatial correlation}}.
+\end{equation}
+We have that, if $\tau > 0$, then
+\begin{equation}
+\label{I>0}
+    \boldsymbol{Z}^\top\boldsymbol{Z} > \boldsymbol{Z}^\top\left( \boldsymbol{I} - \boldsymbol{W}\right)\boldsymbol{Z},
+\end{equation}
+and if $\tau < 0$, then
+\begin{equation}
+\label{I<0}
+    \boldsymbol{Z}^\top\boldsymbol{Z} < \boldsymbol{Z}^\top\left( \boldsymbol{I} - \boldsymbol{W}\right)\boldsymbol{Z}.
+\end{equation}
+:::
+
+
+## 
+:::{style="max-width: 100%;"}
+The previous equations shows that the total variability from the data is directly affected by the spatial autocorrelation. From the inverse of the first eq. $(\tau>0)$ and the multiplication of the expression by $\bar{Z}^2$ make it clearer
+\begin{equation}
+\label{ENL1}
+    \frac{\bar{Z}^2}{\boldsymbol{Z}^\top\boldsymbol{Z}} \leq \frac{\bar{Z}^2}{\boldsymbol{Z}^\top\left( \boldsymbol{I} - \boldsymbol{W}\right)\boldsymbol{Z}} \implies \frac{\bar{Z}^2}{\hat{\sigma}^2_{obs}} \leq \frac{\bar{Z}^2}{\hat{\sigma}^2_{real}}.
+\end{equation}
+Executing the same with the second eq. $(\tau<0)$, we have
+\begin{equation}
+\label{ENL2}
+    \frac{\bar{Z}^2}{\boldsymbol{Z}^\top\boldsymbol{Z}} \geq \frac{\bar{Z}^2}{\boldsymbol{Z}^\top\left( \boldsymbol{I} - \boldsymbol{W}\right)\boldsymbol{Z}} \implies \frac{\bar{Z}^2}{\hat{\sigma}^2_{obs}} \geq \frac{\bar{Z}^2}{\hat{\sigma}^2_{real}},
+\end{equation}
+where $\hat{\sigma}^2_{real}$ is the estimated variance when removing the influence of the dependence structure. Thus, the right side of the abovementioned equations is the ENL estimator based on the inverse of the SCV. Therefore,
+\begin{align*}
+    \text{if $\tau > 0$}\implies\widehat{ENL}_{obs} &\leq \widehat{ENL}_{real},  \\
+    \text{if $\tau < 0$}\implies\widehat{ENL}_{obs} &\geq \widehat{ENL}_{real}, \\
+    \text{and }
+    \text{if $\tau = 0$}\implies\widehat{ENL}_{obs} &= \widehat{ENL}_{real}.
+\end{align*}
+:::
+
+
+## New estimators for the ENL
+### Estimator based on the SCV
+:::{style="max-width: 100%;"}
+The traditional estimator for the ENL works with the inverse of the SCV. An ENL estimator based on the spatially generalized gamma process is therefore given by
+\begin{equation}
+\label{ENLexact}
+    \widehat{ENL} = \hat{\varphi}^{-1} = \left[
+			\frac{\Gamma(\widehat{L})\,\Gamma(\widehat{L}+2/\widehat\nu)}{\Gamma^2(\widehat{L}+1/\widehat\nu)}
+			\,-\,1\right]^{-1},
+\end{equation}
+where $\hat{\nu}$ and $\hat{L}$ are the maximum likelihood estimators of $\nu$ and $L$ respectively.
+Moreover, the term ${\Gamma(L)\,\Gamma(L+2/\nu)}{\Gamma^{-2}(L+1/\nu)}$ is known as the Gurland ratio \cite{Merkle2005, Li2011}, which is a fully monotone function and has a lower bound given by $1+(L\,\nu^2)^{-1}$. Therefore, $\hat{\varphi}^{-1}$ is bounded and its maximum can be given as follows
+\begin{equation}
+\label{ENLapprox}
+    \hat{\varphi}^{-1} \leq \hat{L}\hat{\nu}^2 = \hat{\varphi}^{-1}_{max}.
+\end{equation}
+The ENL estimator and its maximum are $L$ for the gamma distribution. 
+:::
+
+## Estimator based on Pearson residual
+:::{style="max-width: 100%;"}
+As defined by @Kedem2002[p.26], consider the Pearson residual 
+\begin{equation}
+\label{pearsonr}
+	\hat{R}[n,m] = \frac{Z[n,m] - \hat{\mu}[n,m]}{\sqrt{V(\hat{\mu}[n,m])}},
+\end{equation} 
+for $n=w+1,\ldots,N$ and $m=w+1,\ldots,M$, where $V(\widehat{\mu}[n,m])=\mu^2[n,m]$ is the variance function for the G$\Gamma$ law. 
+We have that
+$\{R[n,m]:n=w+1,\ldots,N;m=w+1,\ldots,M\}$ 
+is a martingale difference process such that [@Kedem2002] [p.26]
+\begin{align}
+\mathbb{E}\left[R[n,m]\mid\mathcal{S}[n,m]\right]=0, \mathbb{E}[R[n,m]]=0, \text{and }
+\mathbb{E}[R^2[n,m]]=
+{\left[
+	\frac{\Gamma(L)\,\Gamma(L+2/\nu)}{\Gamma^2(L+1/\nu)}
+	\,-\,1\right]=\varphi}. \nonumber
+\end{align}
+Assuming that the model is correctly specified, we can use the sample variance to estimate the variance of the residual process, $\varphi$. So, an estimator for the ENL based on the Pearson residual is
+\begin{align}
+		\label{E:L.hat}
+		\hat{\varphi}_P^{-1} &= 
+		  \left(\frac{1}{(N-w+1)(M-w+1)}\sum_{n=w+1}^N\,\sum_{m=w+1}^M\,\widehat{R}^2[n,m]\right)^{-1}. \nonumber
+        \end{align}
+:::
+
+## Incorporating polarimetric information
+:::{style="max-width: 100%;"}
+It is known that the multilook PolSAR data, ${\boldsymbol{C}}[n,m]$, are labeled as [@Lee2009] [p.146]: For $\Big[Z^{(\ell)}_\text{HH}[n,m], \,\sqrt{2}\,Z^{(\ell)}_\text{HV}[n,m],\,Z^{(\ell)}_\text{VV}[n,m]\Big]$ as a vector of complex random variables associated with the polarization states HH, HV, and VV at the $\ell$-th look and $[n,m]$-th pixel,
+\begin{align*}
+&{\boldsymbol{C}}[n,m]
+=
+L^{-1} \sum_{\ell=1}^{L}
+&{\begin{bmatrix}
+\left\langle Z^{(\ell)}_\text{HH},Z^{(\ell)}_\text{HH} \right\rangle 
+&
+\sqrt{2} \left\langle Z^{(\ell)}_\text{HH},Z^{(\ell)}_\text{HV}
+ \right\rangle 
+& 
+\left\langle 
+Z^{(\ell)}_\text{HH},Z^{(\ell)}_\text{VV}
+\right\rangle
+\\
+ \sqrt{2}\left\langle Z^{(\ell)}_\text{HV},Z^{(\ell)}_\text{HH}
+ \right\rangle 
+&
+ 2\left\langle Z^{(\ell)}_\text{HV},Z^{(\ell)}_\text{HV}\right\rangle 
+& 
+\sqrt{2}
+\left\langle Z^{(\ell)}_\text{HV},Z^{(\ell)}_\text{VV}
+\right\rangle
+\\
+ \left\langle Z^{(\ell)}_\text{VV}, Z^{(\ell)}_\text{HH} 
+ \right\rangle 
+&
+ \sqrt{2}\left\langle 
+ Z^{(\ell)}_\text{VV},Z^{(\ell)}_\text{HV} 
+ \right\rangle 
+& 
+\left\langle Z^{(\ell)}_\text{VV},Z^{(\ell)}_\text{VV} \right\rangle
+ \end{bmatrix}}_{[n,m]}\!\!\!,
+\end{align*}
+where $\langle A_1,A_2\rangle=A_1\,A_2^*$.
+:::
+
+## 
+:::{style="max-width: 100%;"}
+In this way, we propose the following average weighting structure for the ENL estimators:  using each eigenvector contribution of $\overline{\boldsymbol{C}}[n,m]$:
+\begin{equation}
+\label{averageweighted}
+    \hat{\varphi}^{-1}[n,m] = \sum_{i=1}^3 \frac{c_i \hat{\varphi}_i^{-1}[n,m]}{c},
+\end{equation}
+where $\varphi_i^{-1}[n,m]$ is one of the proposed ENL estimators at the pixel $[n,m]$ associated with the i-$th$ polarization channel, and $c_i$ is the contribution of the $i$th eigenvector associated with the mean matrix of the $N\times M$ image
+$$
+\bar{\mathbf{C}}=\frac{1}{NM}\sum_{n=1}^N\sum_{m=1}^M{\mathbf{C}}[n,m],
+$$
+$c=\sum_{i=1}^3 c_i$, and $c_i = t_{ii}t^{ii}$ such that $t_{ii}$ and $t^{ii}$ are the i-$th$ element of the diagonal of the eigenvector matrix $\mathbf{T}$ of $\bar{\mathbf{C}}$ and its inverse $\mathbf{T}^{-1}$ in the spectral decomposition
+\begin{equation*}
+\bar{\mathbf{C}} = \mathbf{T}\boldsymbol{\Lambda}\mathbf{T}^{-1}
+\end{equation*}
+for $\boldsymbol{\Lambda}$ the eigenvalues of the diagonal matrix of $\bar{\mathbf{C}}$. 
+:::
+
+
+## Simulation study to compare the estimators
+### Bias and mean square error values of the estimates from the ENL estimators
+:::{style="max-width: 150%; text-align: center;"}
+![](Images/BiasMSEestimatorsENL.png){fig-alt="Descrição da imagem" width=150% .fragment}
+:::
+
+## ENL estimated curves from simulated data
+:::{style="max-width: 100%; text-align: center;"}
+![](Images/combined_plot.png){fig-alt="Descrição da imagem" width=90% .fragment}
+:::
+
+
+## SAR intensity images 
+::::{.columns}
+::: {.column width="50%"}
+![](Images/sanfrancisco_HH.png){width=100%}
+San Francisco intensity SAR image from the HH polarization channel
+:::
+
+::: {.column width="50%"}
+![](Images/flevolandhh.png){width=100%}
+Flevoland intensity SAR image from the HH polarization channel
+:::
+::::
+
+
+## Heatmap and categorization of Moran's index 
+
+:::: {.columns}
+
+::: {.column width="49%" style="text-align: center;"}
+![](Images/heatmap_moran1.png){fig-alt="Descrição da imagem" height=250px .fragment}
+<p style="font-size: 14px; margin-top: 5px;">Heatmap of the Moran index $\tau$ of the San Francisco Bay area</p>
+![](Images/heatmap_flevoland_Moran.png){fig-alt="Descrição da imagem" height=250px .fragment}
+<p style="font-size: 14px; margin-top: 5px;">Heatmap of the Moran index $\tau$ of the Flevoland image</p>
+:::
+
+::: {.column width="49%" style="text-align: center;"}
+![](Images/heatmap_tau.png){fig-alt="Descrição da imagem" height=250px .fragment}
+<p style="font-size: 14px; margin-top: 5px;">Categorizing $\tau$ signs according to the Moran test for the San Francisco Bay area</p>
+![](Images/heatmap_flevoland_tau.png){fig-alt="Descrição da imagem" height=250px .fragment}
+<p style="font-size: 14px; margin-top: 5px;">Categorizing $\tau$ signs according to the Moran test for the Flevoland image</p>
+:::
+
+::::
+
+## Heatmap of the estimates of the ENL estimators on the San Francisco SAR image.
+
+:::: {.columns}
+
+::: {.column width="49%" style="text-align: center;"}
+![](Images/heatmap_ENL_G.png){fig-alt="Descrição da imagem" height=225px .fragment}
+<p style="font-size: 14px; margin-top: 5px;">Local ENL estimates of the $\hat{\varphi}_G^{-1}$ estimator</p>
+![](Images/heatmap_ENL_scale.png){fig-alt="Descrição da imagem" height=225px .fragment}
+<p style="font-size: 14px; margin-top: 5px;">Local ENL estimates of the proposed $\hat{\varphi}^{-1}$ estimator</p>
+:::
+
+::: {.column width="49%" style="text-align: center;"}
+![](Images/heatmap_ENL_GG.png){fig-alt="Descrição da imagem" height=225px .fragment}
+<p style="font-size: 14px; margin-top: 5px;">Local ENL estimates of the $\hat{\varphi}_{GG}^{-1}$ estimator</p>
+![](Images/heatmap_ENL_P_scale.png){fig-alt="Descrição da imagem" height=225px .fragment}
+<p style="font-size: 14px; margin-top: 5px;">Local ENL estimates of the proposed $\hat{\varphi}_P^{-1}$ estimator</p>
+:::
+
+::::
+
+## Heatmap of the estimates of the ENL estimators on the Flevoland SAR image.
+
+:::: {.columns}
+
+::: {.column width="49%" style="text-align: center;"}
+![](Images/heatmap_flevoland_ENL_G.png){fig-alt="Descrição da imagem" height=225px .fragment}
+<p style="font-size: 14px; margin-top: 5px;">Local ENL estimates of the $\hat{\varphi}_G^{-1}$ estimator</p>
+![](Images/heatmap_flevoland_ENL_scale.png){fig-alt="Descrição da imagem" height=225px .fragment}
+<p style="font-size: 14px; margin-top: 5px;">Local ENL estimates of the proposed $\hat{\varphi}^{-1}$ estimator</p>
+:::
+
+::: {.column width="49%" style="text-align: center;"}
+![](Images/heatmap_flevoland_ENL_GG.png){fig-alt="Descrição da imagem" height=225px .fragment}
+<p style="font-size: 14px; margin-top: 5px;">Local ENL estimates of the $\hat{\varphi}_{GG}^{-1}$ estimator</p>
+![](Images/heatmap_flevoland_ENL_P_scale.png){fig-alt="Descrição da imagem" height=225px .fragment}
+<p style="font-size: 14px; margin-top: 5px;">Local ENL estimates of the proposed $\hat{\varphi}_P^{-1}$ estimator</p>
+:::
+
+::::
+
+## Mean Square Error of Estimates
+
+:::{style="max-width: 150%; text-align: center;"}
+
+| Estimator               | San Francisco | Flevoland |
+|:-------------------------|:--------------|:----------|
+| $\hat{\varphi}_G^{-1}$    | 5.3410         | 2.6855    |
+| $\hat{\varphi}_{GG}^{-1}$ | 6.9560         | 3.3059    |
+| $\hat{\varphi}^{-1}$      | **3.5610**     | **0.9442** |
+| $\hat{\varphi}_P^{-1}$    | 3.7885         | 1.9845    |
+
+:::
+
+
+<!-- ## Heatmap of the estimates of the proposed ENL estimators on the San Francisco and Flevoland SAR images on their own scale  -->
+
+<!-- :::: {.columns} -->
+
+<!-- ::: {.column width="49%" style="text-align: center;"} -->
+<!-- ![](Images/heatmap_ENL.png){fig-alt="Descrição da imagem" height=225px .fragment} -->
+<!-- <p style="font-size: 14px; margin-top: 5px;">Local ENL estimates of the proposed $\hat{\varphi}^{-1}$ estimator on San Francisco</p> -->
+<!-- ![](Images/heatmap_flevoland_ENL.png){fig-alt="Descrição da imagem" height=225px .fragment} -->
+<!-- <p style="font-size: 14px; margin-top: 5px;">Local ENL estimates of the proposed $\hat{\varphi}^{-1}$ estimator on Flevoland</p> -->
+<!-- ::: -->
+
+<!-- ::: {.column width="49%" style="text-align: center;"} -->
+<!-- ![](Images/heatmap_ENL_P.png){fig-alt="Descrição da imagem" height=225px .fragment} -->
+<!-- <p style="font-size: 14px; margin-top: 5px;">Local ENL estimates of the proposed $\hat{\varphi}_{P}^{-1}$ estimator on San Francisco</p> -->
+<!-- ![](Images/heatmap_flevoland_ENL_P.png){fig-alt="Descrição da imagem" height=225px .fragment} -->
+<!-- <p style="font-size: 14px; margin-top: 5px;">Local ENL estimates of the proposed $\hat{\varphi}_P^{-1}$ estimator on Flevoland</p> -->
+<!-- ::: -->
+
+<!-- :::: -->
+
+
+## ENL estimated curves for both images
+::::{.columns}
+::: {.column width="50%"}
+![](Images/ENL_curves.png){height=450px}
+Curve 1 - $\varphi_{GG}^{-1}$, Curve 2 - $\varphi_{G}^{-1}$, Curve 3 - $\varphi^{-1}$, Curve 4 - $\varphi_{P}^{-1}$ on San Francisco bay area SAR image
+:::
+
+::: {.column width="50%"}
+![](Images/flevoland_ENL_curves.png){height=450px}
+Curve 1 - $\varphi_{GG}^{-1}$, Curve 2 - $\varphi_{G}^{-1}$, Curve 3 - $\varphi^{-1}$, Curve 4 - $\varphi_{P}^{-1}$ on Flevoland SAR image
+:::
+::::
+
+
+## Conclusion
+:::{style="max-width: 100%;"}
+-   Impact of spatial autocorrelation on the ENL.
+-   At least $92\%$ of the pixels on the analyzed SAR images were correlated.
+-   New estimators for the ENL accounting for correlated data.
+-   The proposed estimators has lower MSE than conventional estimators.
+-   The proposed estimators have eliminated the underestimation problem caused by positive spatial correlation.
+:::
+
+# Summarizing results
+
+:::{style="max-width: 100%;"}
+-   Proposing the 2D G$\Gamma$-ARMA model, its theoretical properties, and physical interpretation.
+-   Impact of spatial autocorrelation on the ENL.
+-   New estimators for the ENL accounting for correlated data.
+:::
+
+
+# Contributions
+
+:::{style="max-width: 100%;"}
+-   Papers in development
+    -   Generalized gamma 2D-ARMA process: an analysis of the Brazilian floods in Rio Grande do Sul
+    -   Estimation of the equivalent number of looks on correlated SAR image
+    -   Statistical Analysis of Geodesic Roll-invariant Indexes from PolSAR Data over Crop Fields, with collaboration of Prof. Avik Bhattacharya, Prof. Abraão D. C. Nascimento, and Prof. Alejandro C. Frery. 
+
+-   Conference papers
+    -   W. B. F. Da Silva, A. D. C. Nascimento and F. J. A. Cysneiros, "Analysis of Variance under Log-Symmetric Family for SAR Images," IGARSS 2024 - 2024 IEEE International Geoscience and Remote Sensing Symposium, Athens, Greece, 2024 [@DaSilva2024]
+    -   W. B. F. Da Silva, A. D. C. Nascimento and F. J. A. Cysneiros, "Modelo de regressão aplicado à dados de radar de abertura sintética," CNMAC 2024 - 2024 Congresso Nacional de Matemática Aplicada e Computacional, Porto de Galinhas, Brazil, 2024
+:::
+
+# Awards
+
+- Top 10 most-cited papers published by Environmetrics in 2023, Wiley.
+
+
+# Future works
+:::{style="max-width: 100%;"}
+-   Concrete future works
+    -   Empirical order identification of the autoregressive or moving average parameters on spatial G$\Gamma$-ARMA model
+    -   Goodness-of-fit test for the spatial G$\Gamma$-ARMA model.
+
+-   Possible future works
+    -   Object detection in SAR imagery using design of experiment based on the spatial G$\Gamma$-ARMA model (turning the conference papers into a journal article).
+    -   Change detection in SAR imagery based on the spatial G$\Gamma$-ARMA model. 
+    -   A statistical approach of the Mellin transform for investigating ratio residuals in speckled data.
+:::
+
+
+
+
+# Thank you all for your time!
+
+# References
+
+::: {#refs}
+:::

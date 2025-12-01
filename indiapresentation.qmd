@@ -1,0 +1,35 @@
+---
+title: "Internacionalização na Pós-Graduação: Desafios, Oportunidades e Vivências"
+subtitle: "Mumbai - Índia"
+author: "Willams Batista Ferreira da Silva"
+lang: pt-BR  # <--- ADICIONADO: Define o idioma do documento
+date: "2025-12-10" # <--- ALTERADO: Formato ISO para processamento
+institute: "<br> Departamento de Estatística <br> Centro de Ciências Exatas e da Natureza (CCEN) <br> Universidade Federal de Pernambuco (UFPE) <br> <br> "
+
+format: 
+  revealjs:
+    incremental: true 
+    math: true
+    center: true
+    scrollable: true
+    transition: fade
+    theme: serif
+    slide-number: c/t
+    show-slide-number: all
+    date-format: "DD MMMM YYYY" # <--- MANTIDO: Agora funcionará com 'lang'
+    citations: true
+    fontsize: 140%
+    # ATUALIZEI E TRADUZI O RODAPÉ PARA O CONTEXTO
+    footer: "Departamento de Estatística - CCEN/UFPE - Dezembro 2025" 
+    number-depth: 2 
+    mathjax: true
+# bibliography: Thesis.bib
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+```{r}
+1 + 1
+```

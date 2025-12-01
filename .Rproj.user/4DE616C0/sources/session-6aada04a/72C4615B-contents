@@ -1,0 +1,884 @@
+---
+title: "Defesa de Memorial Acadêmico"
+subtitle: "Edital Nº 08/2025 - UFPE"
+author: "Willams Batista Ferreira da Silva"
+lang: pt-BR  # <--- ADICIONADO: Define o idioma do documento
+date: "2025-11-14" # <--- ALTERADO: Formato ISO para processamento
+institute: "<br> Departamento de Estatística <br> Centro de Ciências Exatas e da Natureza (CCEN) <br> Universidade Federal de Pernambuco (UFPE) <br> <br> "
+
+format: 
+  revealjs:
+    incremental: true 
+    math: true
+    center: true
+    scrollable: true
+    transition: fade
+    theme: serif
+    slide-number: c/t
+    show-slide-number: all
+    date-format: "DD MMMM YYYY" # <--- MANTIDO: Agora funcionará com 'lang'
+    citations: true
+    fontsize: 140%
+    # ATUALIZEI E TRADUZI O RODAPÉ PARA O CONTEXTO
+    footer: "Departamento de Estatística - CCEN/UFPE - Novembro 2025" 
+    number-depth: 2 
+    mathjax: true
+# bibliography: Thesis.bib
+---
+
+## Roteiro da apresentação
+
+::: {.nonincremental}
+Nesta apresentação, abordarei os seguintes eixos da minha trajetória:
+
+1.  Trajetória Acadêmica
+2.  Publicações
+3.  Participações em Congressos
+4.  Atividades Profissionais e de Extensão
+5.  Rede de Colaboração
+:::
+
+---
+
+
+
+## 1. Trajetória Acadêmica
+<hr/>
+::: {.columns}
+
+::: {.column width="19%"}
+
+::: {.nonincremental}
+<div class="timeline-nav">
+  <div class="timeline-nav-item">
+    Graduação (2016-2019)
+  </div>
+  <div class="timeline-nav-item">
+    Mestrado (2020-2022)
+  </div>
+  <div class="timeline-nav-item">
+    Doutorado (2022-prev. dez/2025)
+  </div>
+  </div>
+:::
+
+:::
+
+::: {.column width="81%"}
+
+
+:::
+
+:::
+
+
+<!-- ## 1. Trajetória Acadêmica   -->
+<!-- <hr/> -->
+
+<!-- ::: {.columns} -->
+
+<!-- ::: {.column width="19%"} -->
+
+<!-- ::: {.nonincremental} -->
+<!-- <div class="timeline-nav"> -->
+<!--   <div class="timeline-nav-item highlight"> -->
+<!--     Antes da Universidade (1998-2015) -->
+<!--   </div> -->
+<!--   <div class="timeline-nav-item dimmed"> -->
+<!--     Graduação (2016-2019) -->
+<!--   </div> -->
+<!--   <div class="timeline-nav-item dimmed"> -->
+<!--     Mestrado (2020-2022) -->
+<!--   </div> -->
+<!--   <div class="timeline-nav-item dimmed"> -->
+<!--     Doutorado (2022-prev. dez/2025) -->
+<!--   </div> -->
+<!--   </div> -->
+<!-- ::: -->
+
+
+<!-- ::: -->
+
+<!-- ::: {.column width="81%"} -->
+
+<!-- - "O que você quer ser quando crescer?"  -->
+
+<!-- - Quis ser filósofo, historiador, psicólogo, matemático e físico, nessa ordem -->
+
+<!-- - Estatística foi por *acaso* -->
+
+<!-- - Estatística $\rightarrow$ Física -->
+
+
+<!-- ::: -->
+
+<!-- ::: -->
+
+
+## 1. Trajetória Acadêmica 
+
+<hr/>
+
+::: {.columns}
+
+::: {.column width="19%"}
+
+
+::: {.nonincremental}
+<div class="timeline-nav">
+  <div class="timeline-nav-item highlight">
+    Graduação (2016-2019)
+  </div>
+  <div class="timeline-nav-item dimmed">
+    Mestrado (2020-2022)
+  </div>
+  <div class="timeline-nav-item dimmed">
+    Doutorado (2022-prev. dez/2025)
+  </div>
+  </div>
+:::
+
+
+
+:::
+
+::: {.column width="81%"}
+
+::: {.nonincremental}
+
+- Ingressei no Bacharelado em Estatística da UFPE em 2016
+
+- Monitorias de Probabilidade 2, 4 e Inferência Estatística 2 
+
+- PIBIC em "Estimação do Risco Sistemático em Modelos CAPM", sob orientação do Prof. Dr. Francisco J. A. Cysneiros
+
+- Defesa de TCC sobre "Ensaios sobre Geometria Diferencial e Estatística" sob orientação do Prof. Dr. Abraão D. C. Nascimento em 2019.2
+
+- Abd El-Bar AMT, da Silva WBF, Nascimento ADC. *An Extended log-Lindley-G Family: Properties and Experiments in Repairable Data*. Mathematics. 2021; 9(23):3108. https://doi.org/10.3390/math9233108
+
+
+:::
+
+:::
+
+:::
+
+
+##  1. Trajetória Acadêmica
+
+<hr/>
+
+::: {.columns}
+
+::: {.column width="19%"}
+
+
+::: {.nonincremental}
+<div class="timeline-nav">
+  <div class="timeline-nav-item dimmed">
+    Graduação (2016-2019)
+  </div>
+  <div class="timeline-nav-item highlight">
+    Mestrado (2020-2022)
+  </div>
+  <div class="timeline-nav-item dimmed">
+    Doutorado (2022-prev. dez/2025)
+  </div>
+  </div>
+:::
+
+
+:::
+
+::: {.column width="81%"}
+
+::: {.nonincremental}
+
+::: {.fragment}
+
+- Ingressei no mestrado em Estatística da UFPE em março de 2020, sob orientação do Prof. Dr. Abraão D. C. Nascimento
+
+- Pandemia COVID-19 e EAD
+
+
+:::
+
+
+:::
+
+
+- Defesa do Mestrado em Fevereiro de 2022, manuscrito intitulado como *"Processo ARMA Gama Generalizado Aplicado a Imagens de Amplitude e Intensidade SAR"* sob orientação do Prof. Dr. Abraão D. C. Nascimento
+
+  - da Silva, W. B. F., Almeida-Junior, P. M., & Nascimento, A. D. C. (2023). *Generalized gamma ARMA process for synthetic aperture radar amplitude and intensity data*. Environmetrics, 34(7), e2816. https://doi.org/10.1002/env.2816
+
+    - Prêmio de *Top 10 most-cited papers published by Environmetrics in 2023*, concedido pela Editora Wiley em 2025
+
+
+
+:::
+
+:::
+
+
+
+##  1. Trajetória Acadêmica
+
+
+<hr/>
+
+::: {.columns}
+
+::: {.column width="19%"}
+
+
+::: {.nonincremental}
+<div class="timeline-nav">
+  <div class="timeline-nav-item dimmed">
+    Graduação (2016-2019)
+  </div>
+  <div class="timeline-nav-item dimmed">
+    Mestrado (2020-2022)
+  </div>
+  <div class="timeline-nav-item highlight">
+    Doutorado (2022-prev. dez/2025)
+  </div>
+  </div>
+:::
+
+
+
+:::
+
+::: {.column width="81%"}
+
+
+- Ingressei no Doutorado em Estatística da UFPE em março de 2022, sob orientação do Prof. Dr. Abraão D. C. Nascimento e do Prof. Dr. Francisco J. A. Cysneiros
+
+- Doutorado Sanduíche no *Indian Institute of Technology Bombay (IITB)*, sob supervisão do Prof. Dr. Avik Bhattacharya
+
+- Microwave Remote Sensing Laboratory (MRSLab) - IITB
+
+- Retorno para o Brasil e continuação de colaboração com o IITB e outros pesquisadores internacionais
+
+
+:::
+
+:::
+
+
+
+
+## 2. Publicações 
+<hr/>
+::: {.columns}
+
+::: {.column width="19%"}
+
+::: {.nonincremental}
+<div class="timeline-nav">
+  <div class="timeline-nav-item">
+    Artigos Publicados 
+  </div>
+  <div class="timeline-nav-item">
+    Artigos Publicados em Congressos 
+  </div>
+  <div class="timeline-nav-item">
+    Artigos em Produção 
+  </div>
+  <div class="timeline-nav-item">
+    Artigos Submetidos 
+  </div>
+  </div>
+:::
+
+:::
+
+::: {.column width="81%"}
+
+
+:::
+
+:::
+
+
+## 2. Publicações
+<hr/>
+::: {.columns}
+
+::: {.column width="19%"}
+
+::: {.nonincremental}
+<div class="timeline-nav">
+  <div class="timeline-nav-item highlight">
+    Artigos Publicados 
+  </div>
+  <div class="timeline-nav-item dimmed">
+    Artigos Publicados em Congressos 
+  </div>
+  <div class="timeline-nav-item dimmed">
+    Artigos em Produção 
+  </div>
+  <div class="timeline-nav-item dimmed">
+    Artigos Submetidos 
+  </div>
+  </div>
+:::
+
+:::
+
+
+
+
+::: {.column width="81%"}
+
+::: {.nonincremental}
+
+::: {.fragment}
+
+* Abd El-Bar AMT, da Silva WBF, Nascimento ADC. *An Extended log-Lindley-G Family: Properties and Experiments in Repairable Data*. Mathematics. 2021; 9(23):3108. https://doi.org/10.3390/math9233108 (Q2 no Scimago)
+
+* da Silva, W. B. F., Almeida-Junior, P. M., & Nascimento, A. D. C. (2023). *Generalized gamma ARMA process for synthetic aperture radar amplitude and intensity data*. Environmetrics, 34(7), e2816. https://doi.org/10.1002/env.2816 (Q2 no Scimago)
+  * Prêmio de *Top 10 most-cited papers published by Environmetrics in 2023*, concedido pela Editora Wiley em 2025
+:::
+
+:::
+
+:::
+
+:::
+
+
+
+
+## 2. Publicações
+<hr/>
+::: {.columns}
+
+::: {.column width="19%"}
+
+::: {.nonincremental}
+<div class="timeline-nav">
+  <div class="timeline-nav-item dimmed">
+    Artigos Publicados 
+  </div>
+  <div class="timeline-nav-item highlight">
+    Artigos Publicados em Congressos 
+  </div>
+  <div class="timeline-nav-item dimmed">
+    Artigos Submetidos 
+  </div>
+  <div class="timeline-nav-item dimmed">
+    Artigos em Produção 
+  </div>
+
+  </div>
+:::
+
+:::
+
+::: {.column width="81%"}
+::: {.nonincremental}
+
+::: {.fragment}
+* **Artigo (Anais de Congresso):** **_"Analysis of Variance under Log-Symmetric Family for SAR Images"_**
+    * **Congresso:** *IGARSS 2024 - IEEE International Geoscience and Remote Sensing Symposium*
+    * **Status:** Apresentado em Atenas, Grécia e publicado (Julho 2024)
+    * **Detalhes:** O maior congresso de Sensoriamento Remoto do mundo
+:::
+
+::: {.fragment}
+* **Artigo (Anais de Congresso):** **_"Modelo de Regressão aplicado a dados do Radar de Abertura Sintética"_**
+    * **Congresso:** *Congresso Nacional de Matemática Aplicada e Computacional (CNMAC) 2024*
+    * **Status:** Apresentado em Porto de Galinhas, Brasil e publicado (Setembro 2024)
+:::    
+
+:::
+:::
+
+:::
+
+
+## 2. Publicações
+<hr/>
+
+::: {style="margin-top: -20px;"}
+
+::: {.columns}
+
+::: {.column width="19%"}
+
+::: {.nonincremental}
+<div class="timeline-nav">
+  <div class="timeline-nav-item dimmed">
+    Artigos Publicados 
+  </div>
+  <div class="timeline-nav-item dimmed">
+    Artigos Publicados em Congressos 
+  </div>
+  <div class="timeline-nav-item highlight">
+    Artigos Submetidos 
+  </div>
+  <div class="timeline-nav-item dimmed">
+    Artigos em Produção 
+  </div>
+  </div>
+:::
+
+:::
+
+::: {.column width="81%"}
+
+::: {.nonincremental}
+
+::: {.fragment}
+* **Artigo (Doutorado Sanduíche):** **_"A GAMLSS Framework for Crop Discrimination Using Geodesic Polarimetric SAR Parameters"_**
+    * **Status:** Submetido (28/10/2025) ao *IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing*
+    * **Ranking:** Q1 (Scimago) em Ciências Planetária e da Terra
+    * **Coautores:** Profs. Abraão D. C. Nascimento, Avik Bhattacharya (IITB) e Alejandro C. Frery (VUW, Nova Zelândia)
+
+:::
+
+::: {.fragment}
+
+* **Artigo (Tese):** **_"Spatial generalized gamma ARMA model: An analysis of the Brazilian floods in Rio Grande do Sul"_**
+    * **Status:** Submetido (02/08/2025) ao *SMAI Journal of Computational Mathematics*
+    * **Ranking:** Q1 (Scimago) em Estatística e Probabilidade
+    * **Coautores:** Profs. Abraão D. C. Nascimento e Francisco J. A. Cysneiros
+
+
+:::
+
+
+::: {.fragment}
+
+* **Artigo (Tese / Sensoriamento Remoto):** **_"Estimation of the Equivalent Number of Looks on Correlated Synthetic Aperture Radar Data"_**
+    * **Status:** Submetido (28/06/2025) ao *Electronic Journal of Statistics*
+    * **Ranking:** Q1 (Scimago) em Estatística e Probabilidade
+    * **Coautores:** Profs. Abraão D. C. Nascimento, Francisco J. A. Cysneiros e Avik Bhattacharya (IITB, Índia)
+
+:::
+
+
+:::
+
+
+:::
+
+:::
+
+
+:::
+
+
+
+
+## 2. Publicações
+<hr/>
+::: {.columns}
+
+::: {.column width="19%"}
+
+::: {.nonincremental}
+<div class="timeline-nav">
+  <div class="timeline-nav-item dimmed">
+    Artigos Publicados 
+  </div>
+  <div class="timeline-nav-item dimmed">
+    Artigos Publicados em Congressos 
+  </div>
+  <div class="timeline-nav-item dimmed">
+    Artigos Submetidos 
+  </div>
+  <div class="timeline-nav-item highlight">
+    Artigos em Produção 
+  </div>
+
+  </div>
+:::
+
+:::
+::: {.column width="81%"}
+::: {.nonincremental}
+
+::: {.fragment}
+  * **Artigo (Tese):** **_"On a general Portmanteau Test in Conditional Spatial ARMA    models"_**
+    * **Status:** Previsão de submissão (Fevereiro 2026)
+    * **Periódico Alvo:** *Journal of the Royal Statistical Society, Series B* (JRSS-B)
+    * **Ranking:** Q1 (Scimago) / Top 4 do Mundo em Estatística
+    * **Coautores:** Profs. Abraão D. C. Nascimento e Francisco J. A. Cysneiros
+:::
+
+::: {.fragment}
+  * **Artigo (Colaboração / Índice de Vegetação):** **_"On the Distribution of the Dual-Polarimetric Radar Vegetation Index"_**
+    * **Status:** Em andamento (Previsão 1ª versão: Fev. 2026)
+    * **Periódico Alvo:** *IEEE Transactions on Geoscience and Remote Sensing* (TGRS)
+    * **Ranking:** Q1 (Scimago) em Ciências Planetária e da Terra e Engenharia
+    * **Coautores:** Profs. Abraão D. C. Nascimento, Avik Bhattacharya (IITB) e Dipankar Mandal (IITG, Índia)
+:::
+
+:::
+:::
+:::
+
+
+## 3. Participação em Eventos
+
+::: {.columns}
+
+::: {.column width="50%"}
+::: {.nonincremental}
+
+* **I Jornada de Iniciação Científica Júnior (DE/UFPE)**
+  * Recife, Brasil (2016) - Seminário
+
+* **II Jornada de Iniciação Científica Júnior (DE/UFPE)**
+  * Recife, Brasil (2017) - Seminário
+
+* **Simpósio Nacional de Probabilidade e Estatística (SINAPE)**
+  * São Pedro, Brasil (2018)
+  * *Apresentação:* "SYMARMA: Um novo modelo em séries temporais para análise de dados simétricos"
+
+* **Workshop on Turning Conference Article into a Journal Paper**
+  * Mumbai, Índia (2023) - Oficina
+
+:::
+:::
+
+::: {.column width="50%"}
+::: {.nonincremental}
+
+* **IEEE International Soil Moisture School**
+  * Mumbai, Índia (2023) - Congresso
+
+* **IEEE International Geoscience and Remote Sensing Symposium (IGARSS)**
+  * Atenas, Grécia (2024) - Simpósio
+  * *Apresentação:* "Analysis of Variance under Log-Symmetric Family for SAR Images"
+
+* **Simpósio Nacional de Probabilidade e Estatística (SINAPE)**
+  * Fortaleza, Brasil (2024) - Simpósio
+
+* **Congresso Nacional de Matemática Aplicada e Computacional (CNMAC)**
+  * Porto de Galinhas, Brasil (2024) - Congresso
+  * *Apresentação:* "Modelo de Regressão aplicado a dados do Radar de Abertura Sintética"
+:::
+:::
+
+:::
+
+
+
+
+## 4. Atividades profissionais e de extensão
+
+<hr/>
+
+### Graduação (UFPE, 2016 - 2019)
+
+::: {.nonincremental}
+
+* **Monitorias (DE/UFPE):**
+    * Probabilidade 2 (3º semestre)
+    * Probabilidade 4 (7º semestre)
+    * Inferência Estatística 2 (8º semestre)
+* **Iniciação Científica (CNPq):**
+    * Orientador: Prof. Francisco J. A. Cysneiros (4º-5º semestres).
+* **Estágio (Tribunal Regional Federal da 5ª Região):**
+    * Elaboração de relatórios mensais (status de processos).
+    * Desenvolvimento de modelagem de séries temporais para previsão de volume processual.
+* **TCC: "Ensaios sobre Geometria Diferencial e Estatística"**
+    * Orientador: Prof. Abraão D. C. Nascimento (Dez 2019).
+
+:::
+
+---
+
+::: {.nonincremental}
+
+### Mestrado (UFPE, 2020 - 2022)
+
+* **Bolsista CAPES** (Orientador: Prof. Abraão D. C. Nascimento).
+* **Dissertação: "Processo ARMA Gama Generalizado Aplicado a Imagens de Amplitude e Intensidade SAR"** (Fev 2022).
+
+
+### Doutorado (UFPE, 2022 - Atual)
+
+* **Bolsista CAPES** (Orientador: Prof. Abraão D. C. Nascimento; Coorientador: Prof. Francisco J. A. Cysneiros).
+* **Doutorado Sanduíche:** Aluno visitante no IITB (Índia).
+* **Estágio Docência:** Atuação na graduação em Estatística (UFPE).
+
+:::
+
+
+## 5. Rede de Colaboração
+<hr/>
+
+#### Com artigos publicados ou submetidos
+
+::: {.nonincremental}
+
+
+- Prof. Dr. Abraão D. C. Nascimento | Departamento de Estatística, Universidade Federal de Pernambuco - Brasil | Bolsista de Produtividade do CNPq Nível C | Índice H: 17
+
+- Prof. Dr. Ahmed M. T. Abd El-Bar | Department of Mathematics, Tanta University -  Egypt | Índice H: 7
+
+- Prof. Dr. Alejandro C. Frery | School of Mathematics and Statistics, Victoria University of Wellington - New Zealand | Ex-Editor Chefe do IEEE Geoscience and Remote Sensing Letters (2014-2018) | Índice H: 47
+
+- Prof. Dr. Avik Bhattacharya | Centre of Studies In Resources Engineering, Indian Institute of Technology Bombay - India | Chefe do Microwave Remote Sensing Lab (MRSLab) | Ex-Editor Chefe do IEEE Geoscience and Remote Sensing Letters (2019-2023) | Índice H: 37
+
+- Prof. Dr. Francisco J. A. Cysneiros | Departamento de Estatística, Universidade Federal de Pernambuco - Brasil | Editor Chefe do Brazilian Journal of Probabilty and Statistics | Bolsista de Produtividade do CNPq Nível C | Índice H: 26
+
+- Prof. Dr. Pedro M. Almeida-Junior - Brasil | Departamento de Estatística, Universidade Estadual da Paraíba | Índice H: 7
+
+
+
+
+:::
+
+
+## 5. Rede de Colaboração
+<hr/>
+
+#### Com trabalhos em discussão ou possibilidades futuras
+
+::: {.nonincremental}
+
+- Dr. Sandeepan Dhoundiyal | Sysmex Corporation | Japan | Research Scientist | Índice H: 2
+
+- Dr. Swarnendu S. Ghosh | University of Genoa - Italy | Post-doctoral position | Índice H: 3
+
+- Mr. Abhinav Verma | Centre of Studies In Resources Engineering, Indian Institute of Technology Bombay - India | Ph.D. Student | Índice H: 6
+
+- Prof. Dr. Dipankar Mandal | School of Agro and Rural Technology, Indian Institute of Technology Guwahati - India | Índice H: 24
+
+- Prof. Dr. Jodavid A. Ferreira | Departamento de Estatística, Universidade Federal de Pernambuco - Brasil | Índice H: 4
+
+- Sr. Miguel G. G. da Silva | Departamento de Engenharia da Produção, Universidade Federal de Minas Gerais - Brasil | Estudante de Doutorado 
+
+
+:::
+
+
+
+## Obrigado!
+
+Agradeço à Egrégia Banca Examinadora pela atenção.
+
+
+::: {.columns}
+
+::: {.column width="34%"}
+<br>
+
+**Willams Batista Ferreira da Silva**
+
+<br>
+
+<div class="contact-info">
+  <a href="mailto:willams.bfsilva@ufpe.br">
+    <i class="fas fa-envelope icon"></i> willams.bfsilva@ufpe.br
+  </a>
+  <br>
+  <a href="http://lattes.cnpq.br/4598185947247904">
+    <i class="fas fa-id-card icon"></i> Lattes (Digital)
+  </a>
+  <br>
+  <a href="https://orcid.org/0000-0002-3680-6212">
+    <i class="fab fa-orcid icon"></i> ORCID (Digital)
+  </a>
+</div>
+:::
+
+::: {.column width="33%"}
+ Lattes (Scan)
+```{r}
+  #| echo: false
+  #| fig.align: "center"
+  #| out.width: "25px"
+  #| warning: false
+  #| message: false
+  
+  # Certifique-se de ter o pacote: install.packages("qrcode")
+  library(qrcode)
+  q1 <-qr_code("[http://lattes.cnpq.br/4598185947247904](http://lattes.cnpq.br/4598185947247904)")
+  plot(q1, main = "Lattes")
+```
+:::
+::: {.column width="33%"}
+ORCID (Scan)
+```{r}
+  #| echo: false
+  #| fig.align: "center"
+  #| out.width: "25px"
+  #| warning: false
+  #| message: false
+
+library(qrcode)
+q2 <- qr_code("[https://orcid.org/0000-0002-3680-6212](https://orcid.org/0000-0002-3680-6212)")
+plot(q2)
+```
+  
+:::
+
+:::
+
+<!-- <style> -->
+<!-- /* O container da navegação */ -->
+<!-- .timeline-nav { -->
+<!--   display: flex; -->
+<!--   justify-content: space-around; -->
+<!--   width: 100%; -->
+<!--   margin-top: 40px; -->
+<!-- } -->
+
+<!-- /* O item principal (a caixa) */ -->
+<!-- .timeline-nav-item { -->
+<!--   padding: 15px 20px; /* Ajustei o padding */ -->
+<!--   border: 2px solid #ccc; -->
+<!--   border-radius: 8px; -->
+<!--   width: 30%; /* Pode precisar de ajuste de largura */ -->
+<!--   text-align: left; /* ALINHA O CONTEÚDO À ESQUERDA */ -->
+<!--   font-size: 1em; /* Fonte base */ -->
+<!--   transition: all 0.3s ease-in-out; -->
+<!--   background-color: #f9f9f9; /* Fundo leve */ -->
+<!-- } -->
+
+<!-- /* Título (Graduação, Mestrado...) dentro da caixa */ -->
+<!-- .timeline-nav-item h4 { -->
+<!--   font-size: 1.1em; -->
+<!--   font-weight: 700; -->
+<!--   color: #333; -->
+<!--   text-align: center; /* CENTRALIZA SÓ O TÍTULO */ -->
+<!--   margin-top: 0; -->
+<!--   margin-bottom: 12px; -->
+<!--   padding-bottom: 5px; -->
+<!--   border-bottom: 1px solid #ddd; /* Linha sutil */ -->
+<!-- } -->
+
+<!-- /* A lista de subtópicos */ -->
+<!-- .subtopic-list { -->
+<!--   font-size: 0.9em; /* Fonte menor */ -->
+<!--   color: #555; -->
+<!--   list-style-position: inside; /* 'Bullet' para dentro */ -->
+<!--   padding-left: 5px; /* Pequeno recuo */ -->
+<!--   margin-bottom: 0; -->
+<!-- } -->
+
+<!-- .subtopic-list li { -->
+<!--   margin-bottom: 5px; /* Espaçamento entre subtópicos */ -->
+<!-- } -->
+
+<!-- /* ESTILOS DE FOCO (exatamente como antes) -->
+<!--   Eles ainda funcionam, aplicando na caixa inteira! -->
+<!-- */ -->
+<!-- .timeline-nav-item.highlight { -->
+<!--   border-color: #007b5e;  -->
+<!--   color: #005f48;  -->
+<!--   transform: scale(1.05);  -->
+<!--   box-shadow: 0 5px 15px rgba(0,0,0,0.15); -->
+<!--   background-color: #fff; /* Fundo branco no destaque */ -->
+<!-- } -->
+
+<!-- .timeline-nav-item.dimmed { -->
+<!--   opacity: 0.3;  -->
+<!--   transform: scale(0.95);  -->
+<!--   filter: grayscale(80%); -->
+<!-- } -->
+<!-- </style> -->
+
+<style>
+/* Este container vai na coluna da esquerda.
+Ele empilha as caixas verticalmente.
+*/
+.timeline-nav-sidebar {
+  display: flex;
+  flex-direction: column;   /* Empilha as caixas */
+  justify-content: center; /* Começa pelo topo */
+  padding-right: 15px;       /* Espaço entre a sidebar e o conteúdo */
+  border-right: 2px solid #eee; /* Linha vertical separadora */
+  height: 100%; /* Tenta ocupar a altura */
+}
+
+/* Cada caixa/item da sidebar.
+Feito para ser pequeno e discreto.
+*/
+.timeline-nav-item {
+  padding: 15px 2px; /* Padding menor = caixa menor */
+  border: 2px solid #ccc;
+  border-radius: 1px;
+  width: 90%;         /* 100% da coluna da esquerda */
+  margin-bottom: 15px; /* Espaço entre caixas */
+  text-align: center;  /* Centraliza o texto */
+  font-size: 1em;   /* Fonte menor = caixa menor */
+  font-weight: 500;
+  transition: all 0.3s ease-in-out;
+  background-color: #f9f9f9;
+}
+
+/* --- Estilos de Foco (A lógica de sempre) --- */
+
+.timeline-nav-item.highlight {
+  border-color: #007b5e; /* Verde UFPE */
+  color: #005f48;
+  font-weight: 700; /* Mais negrito */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  background-color: #fff;
+}
+
+.timeline-nav-item.dimmed {
+  opacity: 0.5; /* Mais visível, já que é um menu */
+  filter: grayscale(50%);
+  background-color: #fafafa;
+  border-color: #eee;
+}
+</style>
+
+
+<style>
+.cronograma-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8em; /* Ajusta o tamanho p/ caber no slide */
+}
+.cronograma-table th, .cronograma-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+  vertical-align: top; /* Alinha o texto no topo */
+}
+.cronograma-table thead th {
+  background-color: #f3f3f3; /* Cinza 15% */
+  text-align: center;
+}
+.cronograma-table td ul {
+  margin: 0;
+  padding-left: 18px; /* Recuo dos bullets */
+}
+.cronograma-table .ano {
+  width: 10%;
+  text-align: center;
+  font-weight: bold;
+  vertical-align: middle; /* Centraliza o 'Ano 1' */
+}
+</style>
+
+<style>
+.contact-info {
+  font-size: 0.85em; /* Tamanho da fonte dos contatos */
+  text-align: left;  /* Alinha à esquerda no slide */
+  margin-top: 25px;
+  line-height: 1.9;  /* Espaçamento entre as linhas */
+}
+.contact-info a {
+  text-decoration: none; /* Remove o sublinhado */
+  color: #333; /* Cor do texto */
+}
+.contact-info a:hover {
+  color: #007b5e; /* Cor da UFPE ao passar o mouse */
+}
+/* Estilo para os ícones */
+.contact-info .icon {
+  margin-right: 12px; /* Espaço entre o ícone e o texto */
+  font-size: 1.3em;   /* Tamanho do ícone */
+  color: #007b5e;    /* Cor do ícone */
+}
+</style>
