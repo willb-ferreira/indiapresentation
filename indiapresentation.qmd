@@ -109,7 +109,7 @@ format:
 
 
 
-## Vivências
+## Vivências - IITB
 
 ::: {.nonincremental}
 
@@ -126,7 +126,7 @@ format:
 
 :::
 
-## Vivências
+## Vivências - Sanjay Gandhi National Park
 
 
 ::: {.nonincremental}
@@ -143,7 +143,7 @@ format:
 
 :::
 
-## Vivências
+## Vivências - Goa
 
 ::: {.nonincremental}
 

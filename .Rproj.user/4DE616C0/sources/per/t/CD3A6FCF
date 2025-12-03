@@ -3,7 +3,7 @@
     "path": "~/GitHub/indiapresentation/indiapresentation.qmd",
     "project_path": "indiapresentation.qmd",
     "type": "quarto_markdown",
-    "hash": "324863968",
+    "hash": "1190616033",
     "contents": "",
     "dirty": false,
     "created": 1764628670890.0,
@@ -17,15 +17,15 @@
         "docOutlineVisible": "1",
         "rmdVisualCollapsedChunks": "",
         "rmdVisualModeLocation": "15:453",
-        "cursorPosition": "174,51",
-        "scrollLine": "175"
+        "cursorPosition": "162,0",
+        "scrollLine": "165"
     },
     "folds": "",
-    "lastKnownWriteTime": 1764730367,
+    "lastKnownWriteTime": 1764730702,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1764730367749,
+    "last_content_update": 1764730702152,
     "read_only": false,
     "read_only_alternatives": []
 }
