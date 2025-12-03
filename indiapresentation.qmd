@@ -1,10 +1,10 @@
 ---
-title: "Internacionalização na Pós-Graduação: Desafios, Oportunidades e Vivências"
+title: "Seminários de Pós-Graduação: Internacionalização na Pós-Graduação"
 subtitle: "Indian Institute of Technology Bombay - Mumbai - India"
 author: "Willams Batista Ferreira da Silva"
 lang: pt-BR  # <--- ADICIONADO: Define o idioma do documento
 date: "2025-12-10" # <--- ALTERADO: Formato ISO para processamento
-institute: "<br> Departamento de Estatística <br> Centro de Ciências Exatas e da Natureza (CCEN) <br> Universidade Federal de Pernambuco (UFPE) <br> <br> "
+institute: "<br> Professora: Fernanda de Bastiani <br><br> Departamento de Estatística <br> Centro de Ciências Exatas e da Natureza (CCEN) <br> Universidade Federal de Pernambuco (UFPE) <br> <br> "
 
 format: 
   revealjs:
