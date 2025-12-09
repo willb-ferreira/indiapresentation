@@ -201,21 +201,27 @@ Agradeço à todos pela atenção.
 
 <br>
 
+<br>
+
 **Willams Batista Ferreira da Silva**
 
 <br>
 
 <div class="contact-info">
-  <a href="mailto:willams.bfsilva@ufpe.br">
-    <i class="fas fa-envelope icon"></i> willams.bfsilva@ufpe.br
+  <a href="willb-ferreira.github.io">
+    <i class="fas fa-github icon"></i> GitHub (willb-ferreira)
   </a>
   <br>
   <a href="http://lattes.cnpq.br/4598185947247904">
-    <i class="fas fa-id-card icon"></i> Lattes (Digital)
+    <i class="fas fa-id-card icon"></i> Lattes 
   </a>
   <br>
   <a href="https://orcid.org/0000-0002-3680-6212">
-    <i class="fab fa-orcid icon"></i> ORCID (Digital)
+    <i class="fab fa-orcid icon"></i> ORCID
+  </a>
+  <br>
+  <a href="mailto:willams.bfsilva@ufpe.br">
+    <i class="fas fa-envelope icon"></i> willams.bfsilva@ufpe.br
   </a>
 </div>
 :::
