@@ -563,33 +563,39 @@ Willams Batista Ferreira da Silva
 <div class="columns">
 <div class="column" style="width:34%;">
 <p><br></p>
+<p><br></p>
+<p><br></p>
+<p><br></p>
 <p><strong>Willams Batista Ferreira da Silva</strong></p>
 <p><br></p>
 <div class="contact-info">
 <p><a href="mailto:willams.bfsilva@ufpe.br"> <i class="fas fa-envelope icon"></i> willams.bfsilva@ufpe.br </a> <br> <a href="http://lattes.cnpq.br/4598185947247904"> <i class="fas fa-id-card icon"></i> Lattes (Digital) </a> <br> <a href="https://orcid.org/0000-0002-3680-6212"> <i class="fab fa-orcid icon"></i> ORCID (Digital) </a></p>
 </div>
 </div><div class="column" style="width:33%;">
-<p>Lattes (Scan)</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="indiapresentation_files/figure-revealjs/unnamed-chunk-1-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
+<!--  Lattes (Scan) -->
+<!-- ```{r} -->
+<!--   #| echo: false -->
+<!--   #| fig.align: "center" -->
+<!--   #| out.width: "25px" -->
+<!--   #| warning: false -->
+<!--   #| message: false -->
+<!--   # Certifique-se de ter o pacote: install.packages("qrcode") -->
+<!--   library(qrcode) -->
+<!--   q1 <-qr_code("[http://lattes.cnpq.br/4598185947247904](http://lattes.cnpq.br/4598185947247904)") -->
+<!--   plot(q1, main = "Lattes") -->
+<!-- ``` -->
 </div><div class="column" style="width:33%;">
-<p>ORCID (Scan)</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="indiapresentation_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
+<!-- ORCID (Scan) -->
+<!-- ```{r} -->
+<!--   #| echo: false -->
+<!--   #| fig.align: "center" -->
+<!--   #| out.width: "25px" -->
+<!--   #| warning: false -->
+<!--   #| message: false -->
+<!-- library(qrcode) -->
+<!-- q2 <- qr_code("[https://orcid.org/0000-0002-3680-6212](https://orcid.org/0000-0002-3680-6212)") -->
+<!-- plot(q2) -->
+<!-- ``` -->
 </div>
 </div>
 
@@ -809,82 +815,6 @@ Willams Batista Ferreira da Silva
         ]
       });
     </script>
-    
-
-    <script>
-
-      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-
-      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-
-      // slide changes (different for each slide format).
-
-      (function () {
-
-        // dispatch for htmlwidgets
-
-        function fireSlideEnter() {
-
-          const event = window.document.createEvent("Event");
-
-          event.initEvent("slideenter", true, true);
-
-          window.document.dispatchEvent(event);
-
-        }
-
-    
-
-        function fireSlideChanged(previousSlide, currentSlide) {
-
-          fireSlideEnter();
-
-    
-
-          // dispatch for shiny
-
-          if (window.jQuery) {
-
-            if (previousSlide) {
-
-              window.jQuery(previousSlide).trigger("hidden");
-
-            }
-
-            if (currentSlide) {
-
-              window.jQuery(currentSlide).trigger("shown");
-
-            }
-
-          }
-
-        }
-
-    
-
-        // hookup for slidy
-
-        if (window.w3c_slidy) {
-
-          window.w3c_slidy.add_observer(function (slide_num) {
-
-            // slide_num starts at position 1
-
-            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-
-          });
-
-        }
-
-    
-
-      })();
-
-    </script>
-
-    
-
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {

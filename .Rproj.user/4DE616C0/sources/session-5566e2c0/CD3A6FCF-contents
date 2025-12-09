@@ -195,6 +195,12 @@ Agradeço à todos pela atenção.
 ::: {.column width="34%"}
 <br>
 
+<br>
+
+<br>
+
+<br>
+
 **Willams Batista Ferreira da Silva**
 
 <br>
@@ -215,33 +221,33 @@ Agradeço à todos pela atenção.
 :::
 
 ::: {.column width="33%"}
- Lattes (Scan)
-```{r}
-  #| echo: false
-  #| fig.align: "center"
-  #| out.width: "25px"
-  #| warning: false
-  #| message: false
-  
-  # Certifique-se de ter o pacote: install.packages("qrcode")
-  library(qrcode)
-  q1 <-qr_code("[http://lattes.cnpq.br/4598185947247904](http://lattes.cnpq.br/4598185947247904)")
-  plot(q1, main = "Lattes")
-```
+<!--  Lattes (Scan) -->
+<!-- ```{r} -->
+<!--   #| echo: false -->
+<!--   #| fig.align: "center" -->
+<!--   #| out.width: "25px" -->
+<!--   #| warning: false -->
+<!--   #| message: false -->
+
+<!--   # Certifique-se de ter o pacote: install.packages("qrcode") -->
+<!--   library(qrcode) -->
+<!--   q1 <-qr_code("[http://lattes.cnpq.br/4598185947247904](http://lattes.cnpq.br/4598185947247904)") -->
+<!--   plot(q1, main = "Lattes") -->
+<!-- ``` -->
 :::
 ::: {.column width="33%"}
-ORCID (Scan)
-```{r}
-  #| echo: false
-  #| fig.align: "center"
-  #| out.width: "25px"
-  #| warning: false
-  #| message: false
+<!-- ORCID (Scan) -->
+<!-- ```{r} -->
+<!--   #| echo: false -->
+<!--   #| fig.align: "center" -->
+<!--   #| out.width: "25px" -->
+<!--   #| warning: false -->
+<!--   #| message: false -->
 
-library(qrcode)
-q2 <- qr_code("[https://orcid.org/0000-0002-3680-6212](https://orcid.org/0000-0002-3680-6212)")
-plot(q2)
-```
+<!-- library(qrcode) -->
+<!-- q2 <- qr_code("[https://orcid.org/0000-0002-3680-6212](https://orcid.org/0000-0002-3680-6212)") -->
+<!-- plot(q2) -->
+<!-- ``` -->
   
 :::
 
